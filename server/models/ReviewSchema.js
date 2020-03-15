@@ -23,15 +23,19 @@ const ReviewSchema = new Schema({
 		type: String,
 		trim: true,
 	},
-	description: {
+	category: {
 		type: String,
-		trim: true,
-		required: true
+		default: 'Miscellaneous'
 	},
 	rating: {
 		type: Number,
 		min: 1,
 		max: 5,
+		required: true
+	},
+	description: {
+		type: String,
+		trim: true,
 		required: true
 	},
 	img: {
