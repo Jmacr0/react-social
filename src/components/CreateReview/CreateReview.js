@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { Form, Container } from 'react-bootstrap';
+import { Form, Container, Button, Row, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { ToggleContext } from '../../utils/ToggleContext';
+import API from '../../utils/API';
 
 const ContentRight = styled.div`
 	&.openNav {
@@ -17,47 +19,74 @@ export const CreateReview = () => {
 	const [item, setItem] = useState('');
 	const [title, setTitle] = useState('');
 	const [rating, setRating] = useState('');
+	const [pros, setPros] = useState('');
+	const [cons, setCons] = useState('');
 	const [description, setDescription] = useState('');
 
 	const toggle = useContext(ToggleContext);
 
-	const handleSubmit = (event) => {
+	const [redirect, setRedirect] = useState();
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const newReview = {
+			item,
+			title,
+			rating,
+			pros,
+			cons,
+			description
+		}
+		const response = API.saveReview(newReview);
+		setRedirect(response);
 	}
 
 	return (
 		<>
 			<ContentRight className={toggle.collapse ? 'closedNav' : 'openNav'}>
 				<Container className='shadow p-3'>
+					<h2>New Review</h2>
+					<hr />
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="exampleForm.ControlInput1">
-							<Form.Label>Item</Form.Label>
+							<Form.Label>Item *</Form.Label>
 							<Form.Control type="text" name='item' value={item} placeholder="'Airpods'" onChange={e => setItem(e.target.value)} />
 						</Form.Group>
 						<Form.Group controlId="exampleForm.ControlInput2">
-							<Form.Label>Title</Form.Label>
+							<Form.Label>Title *</Form.Label>
 							<Form.Control type="text" name='title' value={title} placeholder="'Well, that was quite expensive!'" onChange={e => setTitle(e.target.value)} />
 						</Form.Group>
+						<Row>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlInput3">
+									<Form.Label style={{ color: 'green', fontWeight: 'bold' }}>Pros</Form.Label>
+									<Form.Control type="text" name='title' value={pros} placeholder="'Compatible with all my apple products ( the ecosystem ! )'" onChange={e => setPros(e.target.value)} />
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlInput4">
+									<Form.Label style={{ color: 'red', fontWeight: 'bold' }}>Cons</Form.Label>
+									<Form.Control type="text" name='title' value={cons} placeholder="'Expensive'" onChange={e => setCons(e.target.value)} />
+								</Form.Group>
+							</Col>
+						</Row>
 						<Form.Group>
-							<Form.Label>Rating</Form.Label>
+							<Form.Label>Rating <span role='img' aria-label='star-emoji'>⭐</span> *</Form.Label>
 							<div key='inline-radio' className="mb-3">
 								{[1, 2, 3, 4, 5].map((rate, index) => {
 									return <Form.Check inline key={index} name='ratingSelection' label={rate} type='radio' id={`inline-radio-${rate}`} onChange={() => setRating(rate)} checked={rating === rate} />
 								})}
-								{/* <Form.Check inline name='ratingSelection' label="1" type='radio' id='inline-radio-1' onChange={() => setRating(1)} checked={rating === 1} />
-								<Form.Check inline name='ratingSelection' label="2" type='radio' id='inline-radio-2' onChange={() => setRating(2)} checked={rating === 2} />
-								<Form.Check inline name='ratingSelection' label="3" type='radio' id='inline-radio-3' onChange={() => setRating(3)} checked={rating === 3} />
-								<Form.Check inline name='ratingSelection' label="4" type='radio' id='inline-radio-4' onChange={() => setRating(4)} checked={rating === 4} />
-								<Form.Check inline name='ratingSelection' label="5" type='radio' id='inline-radio-5' onChange={() => setRating(5)} checked={rating === 5} /> */}
 							</div>
 						</Form.Group>
 						<Form.Group controlId="exampleForm.ControlTextarea1">
-							<Form.Label>Your Review</Form.Label>
+							<Form.Label>Your Review *</Form.Label>
 							<Form.Control as="textarea" rows="4" placeholder="'Great sound but doesn't offer the best value propostion. Other similar quality earphones for much cheaper.'" value={description} onChange={e => setDescription(e.target.value)} />
 						</Form.Group>
+						<Button type='submit'>Save</Button>
 					</Form>
 				</Container>
 			</ContentRight>
+			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
 	)
 }
