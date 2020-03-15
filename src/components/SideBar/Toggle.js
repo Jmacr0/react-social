@@ -33,12 +33,12 @@ const IconStyle = styled.div`
 `
 
 export const Toggle = () => {
-	const toggle = useContext(ToggleContext);
-	const arrow = toggle.collapse ? '' : <FontAwesomeIcon icon={faLongArrowAltLeft} className='arrow' />;
+	const { collapse, onClick } = useContext(ToggleContext);
+	const arrow = collapse ? '' : <FontAwesomeIcon icon={faLongArrowAltLeft} className='arrow' />;
 
 	return (
 		<IconStyle>
-			<FontAwesomeIcon onClick={() => toggle.onClick(toggle.collapse ? false : true)} icon={faAddressCard} className='cursor ml-2' />
+			<FontAwesomeIcon onClick={() => onClick(collapse ? false : true)} icon={faAddressCard} className='cursor ml-2' />
 			{arrow}
 		</IconStyle>
 	);
