@@ -22,8 +22,8 @@ export const Home = () => {
 			<SideBar />
 			<Route exact path='/' component={Feed} />
 			<Route path='/profile' component={Profile} />
-			<Route path='/review' component={Review} />
-			<Route path='/new-review' component={CreateReview} />
+			<Route exact path='/review' component={Review} />
+			<Route path='/review/new' component={CreateReview} />
 		</ToggleContext.Provider >
 	)
 }
