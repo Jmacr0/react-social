@@ -20,13 +20,28 @@ const LinkStyle = styled.div`
 	}
 `
 
-export const Button = ({ value, link }) => {
-	return (
-		<>
-			<LinkStyle>
+export const Button = ({ value, link, onLogout }) => {
+
+	const linkType = link ?
+		(
+			<>
 				<Link to={link} replace className='link'>
 					{value}
 				</Link>
+			</>
+		) :
+		(
+			<>
+				<Link to='' onClick={() => onLogout()} className='link'>
+					{value}
+				</Link>
+			</>
+		)
+
+	return (
+		<>
+			<LinkStyle>
+				{linkType}
 			</LinkStyle>
 		</>
 	)
