@@ -5,12 +5,25 @@ const ReviewSchema = new Schema({
 		type: String,
 		ref: 'User'
 	},
+	item: {
+		type: String,
+		trim: true,
+		required: "Item Name is Required"
+	},
 	title: {
 		type: String,
 		trim: true,
 		required: "Title is Required"
 	},
-	body: {
+	pros: {
+		type: String,
+		trim: true,
+	},
+	cons: {
+		type: String,
+		trim: true,
+	},
+	description: {
 		type: String,
 		trim: true,
 		required: true
