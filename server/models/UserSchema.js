@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema({
-	_id: Schema.Types.ObjectId,
 	username: {
 		type: String,
 		unique: true,
@@ -21,6 +20,7 @@ const UserSchema = new Schema({
 	},
 	experience: {
 		type: Number,
+		default: 1,
 		required: true,
 	},
 	reviews: [{
@@ -36,6 +36,11 @@ const UserSchema = new Schema({
 		default: Date.now
 	}
 });
+
+// UserSchema.methods.comparePassword = function() {
+// 	this.username = `${this.username}...the Coolest!`;
+// 	return this.username;
+//   };
 
 const User = model("User", UserSchema);
 
