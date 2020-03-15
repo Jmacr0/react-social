@@ -12,6 +12,7 @@ router.get('/user/authenticate', (req, res) => {
 // Review Routes
 router.get('/review/all', (req, res) => {
 	db.Review.find({})
+		.sort({ createdAt: 'desc' })
 		.then(allReviews => {
 			res.json(allReviews);
 		})
@@ -22,7 +23,7 @@ router.get('/review/all', (req, res) => {
 
 router.post('/review/new', async (req, res) => {
 	try {
-		const { item, title, rating, pros, cons, description } = req.body;
+		const { item, title, rating, category, pros, cons, description } = req.body;
 		const { username } = req.user;
 		const loggedUser = await db.User
 			.findOne({ username })
@@ -33,6 +34,7 @@ router.post('/review/new', async (req, res) => {
 				item,
 				title,
 				rating,
+				category,
 				pros,
 				cons,
 				description
