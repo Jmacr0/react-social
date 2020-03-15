@@ -23,7 +23,6 @@ export const Feed = () => {
 	useEffect(() => {
 		API.getReviews()
 			.then(reviews => {
-				console.log(reviews);
 				setReviews(reviews)
 			})
 	}, [])
