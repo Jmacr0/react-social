@@ -23,7 +23,7 @@ export const IconLink = ({ link, iconStyle }) => {
 	return (
 		<>
 			<IconStyle>
-				<Link to={link} className='whiteFont'>
+				<Link to={link ? link : ''} className='whiteFont'>
 					<FontAwesomeIcon icon={iconStyle} />
 				</Link>
 			</IconStyle>
