@@ -42,6 +42,10 @@ const ReviewSchema = new Schema({
 		type: String,
 		default: 'https://via.placeholder.com/150'
 	},
+	comments: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Comment'
+	}],
 	createdAt: {
 		type: Date,
 		default: Date.now
