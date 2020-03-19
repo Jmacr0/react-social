@@ -4,6 +4,7 @@ import { DisplayProfile } from './DisplayProfile';
 import { Menus } from './Menus';
 import { Toggle } from './Toggle';
 import { ToggleContext } from '../../utils/ToggleContext';
+import { LevelBar } from './LevelBar';
 
 const SideNav = styled.div`
 		height: 100%; 
@@ -26,21 +27,13 @@ const SideNav = styled.div`
 export const SideBar = () => {
 	const { collapse } = useContext(ToggleContext);
 
-	const untoggledChildren = <>
-		<Toggle />
-		<DisplayProfile />
-		<Menus />
-	</>;
-
-	const toggledChildren = <>
-		<Toggle />
-		<Menus />
-	</>;
-
 	return (
 		<>
 			<SideNav className={collapse ? 'closed' : ''}>
-				{collapse ? toggledChildren : untoggledChildren}
+				<Toggle />
+				<DisplayProfile />
+				<LevelBar />
+				<Menus />
 			</SideNav>
 		</>
 	)
