@@ -8,11 +8,13 @@ import { Container } from 'react-bootstrap';
 const ContentRight = styled.div`
 	&.openNav {
 		margin-left: 220px;
-		padding: 0px 10px;
+		padding: 0px;
+		transition-duration: 0.2s;
 	}
 	&.closedNav {
 		margin-left: 50px;
-		padding: 0px 10px;
+		padding: 0px;
+		transition-duration: 0.2s;
 	}
 `
 
@@ -21,7 +23,7 @@ export const Feed = () => {
 	const [reviews, setReviews] = useState([]);
 
 	useEffect(() => {
-		API.getReviews()
+		API.review.getReviews()
 			.then(reviews => {
 				setReviews(reviews)
 			})
@@ -30,7 +32,7 @@ export const Feed = () => {
 	return (
 		<>
 			<ContentRight className={toggle.collapse ? 'closedNav' : 'openNav'}>
-				<Container>
+				<Container fluid>
 					{reviews.map((review, index) =>
 						<FeedReview review={review} key={index} />
 					)}
