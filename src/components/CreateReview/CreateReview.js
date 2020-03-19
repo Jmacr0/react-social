@@ -31,7 +31,7 @@ export const CreateReview = () => {
 
 	const [redirect, setRedirect] = useState();
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const { category } = categoryType;
 		const newReview = {
@@ -43,7 +43,7 @@ export const CreateReview = () => {
 			cons,
 			description
 		}
-		const response = API.saveReview(newReview);
+		const response = await API.review.saveReview(newReview);
 		setRedirect(response);
 	}
 
@@ -66,13 +66,13 @@ export const CreateReview = () => {
 							<Col>
 								<Form.Group controlId="exampleForm.ControlInput3">
 									<Form.Label style={{ color: 'green', fontWeight: 'bold' }}>Pros</Form.Label>
-									<Form.Control type="text" name='title' value={pros} placeholder="Compatible with all my apple products ( the ecosystem ! )" onChange={e => setPros(e.target.value)} />
+									<Form.Control type="text" name='title' value={pros} placeholder="Compatible with all my apple products ( the ecosystem ! )" onChange={e => setPros((e.target.value).substring(0, 20))} />
 								</Form.Group>
 							</Col>
 							<Col>
 								<Form.Group controlId="exampleForm.ControlInput4">
 									<Form.Label style={{ color: 'red', fontWeight: 'bold' }}>Cons</Form.Label>
-									<Form.Control type="text" name='title' value={cons} placeholder="Expensive" onChange={e => setCons(e.target.value)} />
+									<Form.Control type="text" name='title' value={cons} placeholder="Expensive" onChange={e => setCons((e.target.value).substring(0, 20))} />
 								</Form.Group>
 							</Col>
 						</Row>
