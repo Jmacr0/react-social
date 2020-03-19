@@ -1,27 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressBook, faImage, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faImage } from '@fortawesome/free-solid-svg-icons';
 
-export const FeedReview = ({ review: { author, item, title, rating, category, pros, cons, description, img, createdAt } }) => {
+export const FeedReview = ({
+	review: {
+		_id,
+		author,
+		item,
+		title,
+		rating,
+		category,
+		pros,
+		cons,
+		description,
+		img,
+		createdAt
+	} }) => {
 
-	const cardColour = () => {
+	const [cardColour, setCardColour] = useState('');
+
+	const loadCardColour = () => {
 		switch (category) {
 			case 'Technology':
-				return 'warning';
+				return setCardColour('warning');
 			case 'Fashion':
-				return 'success';
+				return setCardColour('success');
 			case 'Miscellaneous':
-				return 'secondary';
-			default: return 'secondary';
+				return setCardColour('secondary');
+			default: return setCardColour('secondary');
 		}
 	}
+
+	useEffect(() => {
+		loadCardColour();
+	})
 
 	return (
 		<Row className='my-2'>
 			<Col>
-				<Card bg={cardColour()} text='light'>
+				<Card bg={cardColour} text='light'>
 					<Tab.Container defaultActiveKey="main">
 						<Card.Header style={{ fontWeight: 'bold' }}>
 							<Nav variant="tabs">
@@ -42,14 +61,28 @@ export const FeedReview = ({ review: { author, item, title, rating, category, pr
 									{'⭐'.repeat(rating)}
 								</Nav.Item>
 								<Nav.Item className='ml-auto'>
-									<Link style={{ color: 'white', textDecoration: 'none' }} to='/review'>. . .</Link>
+									<Link to={`/review/one/${_id}`} style={{ color: 'white', textDecoration: 'none' }}>. . .</Link>
 								</Nav.Item>
 							</Nav>
 						</Card.Header>
 						<Tab.Content>
 							<Tab.Pane eventKey='main'>
-								<Card.Body style={{ height: '160px', overflow: 'hidden' }}>
+								<Card.Body style={{ height: '200px', overflow: 'hidden' }}>
 									<Card.Title>{title}</Card.Title>
+									<hr />
+									{pros || cons ? (
+										<>
+											<Row>
+												<Col>
+													<span style={{ color: 'green', fontWeight: 'bold' }}>+</span><span> {pros}</span>
+												</Col>
+												<Col>
+													<span style={{ color: 'red', fontWeight: 'bold' }}>-</span><span> {cons}</span>
+												</Col>
+											</Row>
+											<hr />
+										</>
+									) : ''}
 									<Card.Text>
 										{description}
 									</Card.Text>
