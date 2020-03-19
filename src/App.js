@@ -11,8 +11,14 @@ function App() {
 	});
 
 	const authenticate = async () => {
-		const isAuthenticated = await API.authenticateUser();
-		setAuthenticated(isAuthenticated);
+		const isAuthenticated = await API.user.authenticateUser();
+		setAuthenticated(isAuthenticated.user);
+		if (isAuthenticated.user) {
+			localStorage.setItem('user', isAuthenticated.id);
+		}
+		if (!isAuthenticated.user) {
+			localStorage.setItem('user', '');
+		}
 	}
 
 	useEffect(() => {
