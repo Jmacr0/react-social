@@ -18,6 +18,16 @@ const UserSchema = new Schema({
 		required: "Password is Required",
 		validate: [({ length }) => length >= 6, "Password should be longer."]
 	},
+	bio: {
+		type: String,
+		trim: true,
+		default: 'Your bio goes here. Edit your profile to change!'
+	},
+	img: {
+		type: String,
+		trim: true,
+		default: 'https://via.placeholder.com/150'
+	},
 	experience: {
 		type: Number,
 		default: 1,
@@ -30,6 +40,10 @@ const UserSchema = new Schema({
 	favourites: [{
 		type: Schema.Types.ObjectId,
 		ref: 'Review'
+	}],
+	comments: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Comment'
 	}],
 	createdAt: {
 		type: Date,
