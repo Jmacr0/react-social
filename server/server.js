@@ -5,7 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const app = express();
 const PORT = process.env.PLACEHOLDER || 3001;
-const routes = require("./routes/routes");
+const routes = require("./routes");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

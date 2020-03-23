@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export const Comment = ({ value }) => {
-	const [comment, setComment] = useState(value);
+	const [comment] = useState(value);
 
 	return (
 		<Card>

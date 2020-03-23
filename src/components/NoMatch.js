@@ -1,10 +1,14 @@
 import React from 'react'
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export const NoMatch = () => {
 	return (
 		<Container>
-			<h1>404</h1>
+			<Row>
+				<Col>
+					<h1>404</h1>
+				</Col>
+			</Row>
 		</Container>
 	)
 }

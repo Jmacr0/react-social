@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import API from '../utils/API';
 
 export const SignUp = ({ onAuthenticate }) => {
+
 	const [toggleLogin, setToggleLogin] = useState(true);
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');

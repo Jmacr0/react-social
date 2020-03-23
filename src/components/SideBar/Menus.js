@@ -1,40 +1,25 @@
-import React, { useContext, useState } from 'react';
-import { Button } from './Button';
-import { IconLink } from './IconLink';
-import { ToggleContext } from '../../utils/ToggleContext';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { MenuLink } from './MenuLink';
 import { faCog, faUser, faHeart, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import API from '../../utils/API';
-import { Redirect } from 'react-router-dom';
 
 export const Menus = () => {
-	const { collapse } = useContext(ToggleContext);
 	const [redirect, setRedirect] = useState();
 
 	const handleLogout = async () => {
-		const response = await API.logoutUser();
+		const response = await API.user.logoutUser();
+		localStorage.setItem('user', '');
 		setRedirect(response);
 	}
-
-	const links = collapse ? (
-		<>
-			<IconLink link={'/profile'} iconStyle={faUser} />
-			<IconLink link={'/review/new'} iconStyle={faNewspaper} />
-			<IconLink link={'/'} iconStyle={faHeart} />
-			<IconLink onLogout={handleLogout} iconStyle={faCog} />
-		</>
-	) : (
-			<>
-				<Button value={'Profile'} link={'/profile'} />
-				<Button value={'New Review'} link={'/review/new'} />
-				<Button value={'my Favourites'} link={'/'} />
-				<Button value={'Logout'} onLogout={handleLogout} />
-			</>
-		)
 
 	return (
 		<>
 			<hr />
-			{links}
+			<MenuLink iconStyle={faUser} iconeSty value={'PROFILE'} link={'/profile'} />
+			<MenuLink iconStyle={faNewspaper} value={'NEW REVIEW'} link={'/review/new'} />
+			<MenuLink iconStyle={faHeart} value={'MY FAVOURITES'} link={'/'} />
+			<MenuLink iconStyle={faCog} value={'LOGOUT'} onLogout={handleLogout} />
 			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
 	)

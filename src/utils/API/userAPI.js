@@ -8,7 +8,6 @@ export default {
 	},
 	getCurrentUser: async function () {
 		const response = await axios.get('/api/user/current');
-		console.log(response.data)
 		return response.data;
 	},
 	saveUser: async function (newUser) {

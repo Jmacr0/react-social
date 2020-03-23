@@ -2,7 +2,6 @@ const db = require('../models/index');
 
 module.exports = {
 	saveNew: async (req, res) => {
-		console.log('backend!')
 		try {
 			console.log('start try!')
 			const { review, body } = req.body;
