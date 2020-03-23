@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressBook, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { faAddressBook, faImage, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from 'react';
+import { UserContext } from '../../utils/UserContext';
+import API from '../../utils/API';
 
 export const FeedReview = ({
 	review: {
@@ -16,8 +20,34 @@ export const FeedReview = ({
 		cons,
 		description,
 		img,
+		favourites,
 		createdAt
 	} }) => {
+
+	const { id } = useContext(UserContext);
+	const isFavourite = (favourite, index) => {
+		console.log(id, favourite.author)
+		if (id === favourite.author) {
+			return <FontAwesomeIcon key={index} icon={faHeartSolid} onClick={() => toUnfavourite()} />
+		}
+		return <FontAwesomeIcon key={index} icon={faHeartRegular} onClick={() => toFavourite()} />
+	}
+	const toFavourite = async () => {
+		const newFavourite = {
+			review: _id,
+			author: id
+		}
+		const favourited = await API.favourite.saveFavourite(newFavourite);
+		console.log('front end favourite: ', favourited);
+	}
+	const toUnfavourite = () => {
+		const removeFavourite = {
+			review: _id,
+			author: id
+		}
+		const unfavourited = await API.favourite.removeFavourite(removeFavourite);
+		console.log('front end favourite: ', favourited);
+	}
 
 	const [cardColour, setCardColour] = useState('');
 
@@ -56,6 +86,11 @@ export const FeedReview = ({
 								</Nav.Item>
 								<Nav.Item>
 									<Nav.Link style={{ color: 'white' }} disabled>{item}</Nav.Link>
+								</Nav.Item>
+								<Nav.Item className='ml-auto'>
+									<Nav.Link>
+										{favourites.length ? favourites.map((favourite, index) => isFavourite(favourite, index)) : <FontAwesomeIcon icon={faHeartRegular} onClick={() => toFavourite()} />}
+									</Nav.Link>
 								</Nav.Item>
 								<Nav.Item className='ml-auto'>
 									{'⭐'.repeat(rating)}
