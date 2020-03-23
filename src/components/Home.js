@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom'
-import { Feed } from './Feed/Feed';
 import { SideBar } from './SideBar/SideBar';
 import { ToggleContext } from '../utils/ToggleContext';
-import { Profile } from './Profile/Profile';
 import { Navigation } from './Navigation/Navigation';
-import { Review } from './Review/Review';
-import { CreateReview } from './CreateReview/CreateReview';
-import { ProfileEdit } from './Profile/ProfileEdit';
-import { Category } from './Category/Category';
+import { CategoryContext } from '../utils/CategoryContext';
+import { UserContext } from '../utils/UserContext';
+import { useEffect } from 'react';
+import API from '../utils/API';
+import { Main } from './Main';
 
 export const Home = () => {
 	const [toggleState, setToggleState] = useState({
@@ -18,16 +16,61 @@ export const Home = () => {
 		}
 	});
 
+	const [categoryState, setCategoryState] = useState({
+		selection: '',
+		search: '',
+		onChange: (selection) => {
+			setCategoryState({ ...categoryState, selection, search: '' });
+		},
+		onSearch: (search) => {
+			setCategoryState({ ...categoryState, search, selection: '' })
+		}
+	});
+
+	const [userState, setUserState] = useState({
+		id: '',
+		username: '',
+		email: '',
+		bio: '',
+		img: '',
+		experience: '',
+		reviews: [],
+		favourites: [],
+		comments: [],
+	});
+
+	const loadUser = async () => {
+		const currentUser = await API.user.getCurrentUser();
+		console.log('loaded user: ', currentUser)
+		const { _id, username, email, bio, img, experience, reviews, favourites, comments } = currentUser;
+		setUserState({
+			id: _id,
+			username,
+			email,
+			bio,
+			img,
+			experience,
+			reviews,
+			favourites,
+			comments,
+		});
+		console.log(username)
+	}
+
+	useEffect(() => {
+		loadUser();
+	}, [])
+
+
 	return (
 		<ToggleContext.Provider value={toggleState}>
-			<Navigation />
-			<SideBar />
-			<Route exact path='/profile/edit' component={ProfileEdit} />
-			<Route exact path='/profile' component={Profile} />
-			<Route exact path='/review/one/:id' component={Review} />
-			<Route exact path='/review/new' component={CreateReview} />
-			<Route exact path='/feed' component={Feed} />
-			<Route exact path='/' component={Category} />
+			<CategoryContext.Provider value={categoryState}>
+				<UserContext.Provider value={userState}>
+					<Navigation />
+					<SideBar />
+					<Main />
+				</UserContext.Provider>
+			</CategoryContext.Provider>
 		</ToggleContext.Provider >
 	)
 }
