@@ -1,33 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Tab, Nav, Form, Button } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { ToggleContext } from '../../utils/ToggleContext';
-import styled from 'styled-components';
 import API from '../../utils/API';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAddressBook, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Comment } from '../Comment/Comment';
 
-const ContentRight = styled.div`
-	&.openNav {
-		margin-left: 220px;
-		padding: 0px;
-		transition-duration: 0.2s;
-	}
-	&.closedNav {
-		margin-left: 50px;
-		padding: 0px;
-		transition-duration: 0.2s;
-	}
-`
-
 export const Review = ({ match }) => {
-	const toggle = useContext(ToggleContext);
 	const [cardColour, setCardColour] = useState('');
 
 	const [review, setReview] = useState({
 		img: '',
-		id: '',
+		_id: '',
 		item: '',
 		title: '',
 		author: '',
@@ -65,13 +49,13 @@ export const Review = ({ match }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const newComment = {
-			review: review.id,
+			review: review._id,
 			body: comment,
 		}
 		console.log(newComment)
 		const response = await API.comment.saveComment(newComment);
 		console.log('front-end', response)
-		setRedirect(`/review/one/${review.id}`);
+		setRedirect(`/review/one/${review._id}`);
 	}
 
 	useEffect(() => {
@@ -83,7 +67,7 @@ export const Review = ({ match }) => {
 	}, []);
 
 	return (
-		<ContentRight className={toggle.collapse ? 'closedNav' : 'openNav'}>
+		<>
 			<Container>
 				<Row className='mt-2'>
 					<Col>
@@ -111,7 +95,7 @@ export const Review = ({ match }) => {
 								</Card.Header>
 								<Tab.Content>
 									<Tab.Pane eventKey='main'>
-										<Card.Body style={{ height: '200px', overflow: 'hidden' }}>
+										<Card.Body style={{ minHeight: '200px', overflow: 'hidden' }}>
 											<Card.Title>{review.title}</Card.Title>
 											<hr />
 											{review.pros || review.cons ? (
@@ -173,8 +157,8 @@ export const Review = ({ match }) => {
 						}) : ''}
 					</Col>
 				</Row>
+				{redirect ? <Redirect to={redirect} /> : ''}
 			</Container>
-			{redirect ? <Redirect to={redirect} /> : ''}
-		</ContentRight>
+		</>
 	)
 }

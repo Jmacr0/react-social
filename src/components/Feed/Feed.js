@@ -1,43 +1,47 @@
 import React, { useContext, useEffect, useState, } from 'react';
-import styled from 'styled-components';
-import { ToggleContext } from '../../utils/ToggleContext';
 import API from '../../utils/API';
 import { FeedReview } from './FeedReview';
 import { Container } from 'react-bootstrap';
-
-const ContentRight = styled.div`
-	&.openNav {
-		margin-left: 220px;
-		padding: 0px;
-		transition-duration: 0.2s;
-	}
-	&.closedNav {
-		margin-left: 50px;
-		padding: 0px;
-		transition-duration: 0.2s;
-	}
-`
+import { CategoryContext } from '../../utils/CategoryContext';
 
 export const Feed = () => {
-	const toggle = useContext(ToggleContext);
+	const { selection, search } = useContext(CategoryContext);
 	const [reviews, setReviews] = useState([]);
 
+	const loadReviews = () => {
+		if (selection === 'All' || selection === 'New') {
+			API.review.getReviewsAll()
+				.then(reviews => {
+					setReviews(reviews)
+					return;
+				})
+		} else {
+			API.review.getReviewsOneType(selection)
+				.then(reviews => {
+					setReviews(reviews)
+					return;
+				})
+		}
+		if (search) {
+			API.review.getReviewsSearch(search)
+				.then(reviews => {
+					setReviews(reviews)
+					return;
+				})
+		}
+	}
+
 	useEffect(() => {
-		API.review.getReviews()
-			.then(reviews => {
-				setReviews(reviews)
-			})
-	}, [])
+		loadReviews();
+	}, [search])
 
 	return (
 		<>
-			<ContentRight className={toggle.collapse ? 'closedNav' : 'openNav'}>
-				<Container fluid>
-					{reviews.map((review, index) =>
-						<FeedReview review={review} key={index} />
-					)}
-				</Container>
-			</ContentRight>
+			<Container fluid>
+				{reviews.map((review, index) =>
+					<FeedReview review={review} key={index} />
+				)}
+			</Container>
 		</>
 	)
 }

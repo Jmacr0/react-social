@@ -1,23 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { ToggleContext } from '../../utils/ToggleContext';
-import styled from 'styled-components';
 import API from '../../utils/API';
 
-const ContentRight = styled.div`
-	&.openNav {
-		margin-left: 220px;
-		padding: 0px 10px;
-	}
-	&.closedNav {
-		margin-left: 50px;
-		padding: 0px 10px;
-	}
-`
-
 export const ProfileEdit = () => {
-	const toggle = useContext(ToggleContext);
 	const [toggleEdit, setToggleEdit] = useState(true);
 
 	const [username, setUsername] = useState('');
@@ -125,7 +111,7 @@ export const ProfileEdit = () => {
 	}, [])
 
 	return (
-		<ContentRight className={toggle.collapse ? 'closedNav' : 'openNav'}>
+		<>
 			<Container fluid>
 				<Row>
 					<Col>
@@ -193,6 +179,6 @@ export const ProfileEdit = () => {
 				</Row>
 			</Container >
 			{redirect ? <Redirect to={redirect} /> : ''}
-		</ContentRight >
+		</>
 	)
 }
