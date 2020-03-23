@@ -1,6 +1,7 @@
 import reviewAPI from './reviewAPI';
 import userAPI from './userAPI';
 import commentAPI from './commentAPI';
+import favouriteAPI from './favouriteAPI';
 
 export default {
 	// Review API
@@ -8,5 +9,7 @@ export default {
 	// User API
 	user: userAPI,
 	// Comment API
-	comment: commentAPI
+	comment: commentAPI,
+	// Favourite API
+	favourite: favouriteAPI
 };
