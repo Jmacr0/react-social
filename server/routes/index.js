@@ -4,6 +4,7 @@ const db = require('../models');
 const reviewRoutes = require('./reviewRoutes');
 const userRoutes = require('./userRoutes');
 const commentRoutes = require('./commentRoutes');
+const favouriteRoutes = require('./favouriteRoutes');
 
 // Review Routes
 router.use('/review', reviewRoutes);
@@ -11,6 +12,8 @@ router.use('/review', reviewRoutes);
 router.use('/user', userRoutes);
 // Comment Routes
 router.use('/comment', commentRoutes);
+// Favourite Routes
+router.use('/favourite', favouriteRoutes);
 // Test
 router.post('/find', (req, res) => {
 	db.User.findOne({ username: 'Jmacro0' })
