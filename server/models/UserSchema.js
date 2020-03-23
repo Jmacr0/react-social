@@ -39,7 +39,7 @@ const UserSchema = new Schema({
 	}],
 	favourites: [{
 		type: Schema.Types.ObjectId,
-		ref: 'Review'
+		ref: 'Favourite'
 	}],
 	comments: [{
 		type: Schema.Types.ObjectId,

@@ -46,6 +46,10 @@ const ReviewSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Comment'
 	}],
+	favourites: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Favourite'
+	}],
 	createdAt: {
 		type: Date,
 		default: Date.now
