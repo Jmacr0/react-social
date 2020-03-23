@@ -1,8 +1,16 @@
 import axios from "axios";
 
 export default {
-	getReviews: async function () {
+	getReviewsAll: async function () {
 		const response = await axios.get("/api/review/all");
+		return response.data;
+	},
+	getReviewsOneType: async function (type) {
+		const response = await axios.get("/api/review/all/" + type);
+		return response.data;
+	},
+	getReviewsSearch: async function (search) {
+		const response = await axios.get("/api/review/all/search/" + search);
 		return response.data;
 	},
 	// // Gets the book with the given id
