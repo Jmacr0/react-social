@@ -3,6 +3,33 @@ const db = require('../models/index');
 module.exports = {
 	findAll: (req, res) => {
 		db.Review.find({})
+			.populate('favourites')
+			.sort({ createdAt: 'desc' })
+			.then(allReviews => {
+				res.json(allReviews);
+			})
+			.catch(err => {
+				res.json(err);
+			})
+	},
+	findAllType: (req, res) => {
+		const { type } = req.params;
+		db.Review.find({
+			category: type
+		})
+			.sort({ createdAt: 'desc' })
+			.then(allReviews => {
+				res.json(allReviews);
+			})
+			.catch(err => {
+				res.json(err);
+			})
+	},
+	findAllSearch: (req, res) => {
+		const { search } = req.params;
+		db.Review.find({
+			'item': { "$regex": search, "$options": "i" }
+		})
 			.sort({ createdAt: 'desc' })
 			.then(allReviews => {
 				res.json(allReviews);
@@ -31,7 +58,7 @@ module.exports = {
 	},
 	saveNew: async (req, res) => {
 		try {
-			const { item, title, rating, category, pros, cons, description } = req.body;
+			const { item, title, rating, category, pros, cons, img, description } = req.body;
 			const { username } = req.user;
 
 			const newReview = await db.Review
@@ -43,6 +70,7 @@ module.exports = {
 					category,
 					pros,
 					cons,
+					img,
 					description
 				});
 			const updateUser = await db.User
