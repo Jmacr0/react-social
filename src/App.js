@@ -4,8 +4,10 @@ import { Home } from './components/Home';
 import { SignUp } from './components/SignUp';
 import { NoMatch } from './components/NoMatch';
 import API from './utils/API';
+import AOS from 'aos';
 
 function App() {
+	AOS.init();
 	const [authenticated, setAuthenticated] = useState({
 		authenticated: false,
 	});
