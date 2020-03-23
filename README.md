@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ReviewMe 📚📖 
+---
 
-## Available Scripts
+### Project Three
 
-In the project directory, you can run:
+**Monash University Full Stack Flex Coding Bootcamp**
 
-### `npm start`
+**Live Version:** https://jmacr0.github.io/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+*- Jon*
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## User Story
+```
+As A Consumer
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I Want to find reviews on certain items
 
-### `npm run build`
+So That I can make an informed purchase
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Description
+The **ReviewMe** Application allows users to search for review. The user is provided input areas to filter results. Inputs include:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Keywords
+* Title
+* Author
+* Genre
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ 
+Once the user proceeds to search, **ReadMe** provides the following for each book result:
 
-### `npm run eject`
+* Book Image
+* Title
+* Author
+* Plot Summary
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The books are displayed eight at a time, and is paginated to five pages. A total of 40 books per search. Upon executing a new search, the previous search results are cleared.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![desktop view](https://github.com/Jmacr0/project_one/raw/master/assets/image/desktop.JPG "Logo Title Text 1")
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Instructions
 
-## Learn More
+How to use the **ReadMe** Application:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
+1. Enter any combination of: *Keywords, Title, Author, Genre,* in the input area. Note, the more inputs, the narrower your search becomes.
+---
+2. To begin your search with the input, click the submit button.
+---
+3. Once the search has completed, the results will display at the bottom of the page
+---
+4. Books are displayed 8 per page, and is paginated to 5 pages, for a total of 40 books per search. User can go back and forth between pages.
+---
+## Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Genre
+The Genre dropdown starts of empty. As the user begins to search, the Genre begins to populate. This is then saved on to local storage. When the user exits the application and re-opens, the Genre will repopulate with the previous. 
 
-### Code Splitting
+#### Random
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+The **ReadMe** Application includes a random feature which allows the user to search for a list of random books. This works by randomly selecting a word and using the returned word as a keyword input. 
 
-### Analyzing the Bundle Size
+---
+## Resources
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+**APIs**
 
-### Making a Progressive Web App
+* To retrieve book information we used Google Books API https://developers.google.com/books
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* To display the current Date and Time we used Moment.js https://momentjs.com
 
-### Advanced Configuration
+* To simplify our Javascript we used jQuery https://jquery.com
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+* To use the random search button, we used a random word generator https://random-word-api.herokuapp.com/
 
-### Deployment
+**CSS Framework**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+* To style the application we used Bulma https://bulma.io
 
-### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
