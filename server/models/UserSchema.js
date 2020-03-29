@@ -30,7 +30,7 @@ const UserSchema = new Schema({
 	},
 	experience: {
 		type: Number,
-		default: 1,
+		default: 0,
 		required: true,
 	},
 	reviews: [{
@@ -50,11 +50,6 @@ const UserSchema = new Schema({
 		default: Date.now
 	}
 });
-
-// UserSchema.methods.comparePassword = function() {
-// 	this.username = `${this.username}...the Coolest!`;
-// 	return this.username;
-//   };
 
 const User = model("User", UserSchema);
 

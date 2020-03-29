@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const ReviewSchema = new Schema({
 	author: {
-		type: String,
+		type: Schema.Types.ObjectId,
 		ref: 'User'
 	},
 	item: {
@@ -51,6 +51,10 @@ const ReviewSchema = new Schema({
 		ref: 'Favourite'
 	}],
 	createdAt: {
+		type: Date,
+		default: Date.now
+	},
+	updatedAt: {
 		type: Date,
 		default: Date.now
 	}
