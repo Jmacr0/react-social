@@ -19,9 +19,10 @@ const NavStyle = styled.div`
 		color: white;
 		font-size: 30px;
 		transition-duration: 0.2s;
+		margin: 5px;
 
 		&:hover {
-			color: grey;
+			color: #ccefff;
 		}
 	}
 `
@@ -63,7 +64,7 @@ export const Navigation = () => {
 										style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
 										<Search />
 									</div>
-									<div className='ml-auto'>
+									<div>
 										<Link to='/' replace>
 											<FontAwesomeIcon icon={faHome} className='homeIcon' />
 										</Link>
@@ -87,9 +88,15 @@ export const Navigation = () => {
 											style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
 											<Search />
 										</div>
-										<div className='ml-auto'>
-											<Link to='/' replace>
-												<FontAwesomeIcon icon={faHome} className='homeIcon' />
+										<div className='ml-auto' style={{
+											display: 'flex',
+											alignItems: 'center'
+										}}>
+											<Link to='/' replace style={{ textDecoration: 'none' }}>
+												<h3 className='my-auto homeIcon'>
+													<span role='img' aria-label='books'>📚</span>
+												ReviewMe
+												</h3>
 											</Link>
 										</div>
 									</Row>
