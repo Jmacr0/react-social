@@ -14,7 +14,7 @@ const SideNav = styled.div`
 		z-index: 9999;
 		top: 0; 
 		left: 0;
-		background-color: #222; 
+		background-image: linear-gradient(to right, #001936, #001f42, #001936);
 		overflow-x: hidden;
 		transition: 0.2s;
 
@@ -25,16 +25,16 @@ const SideNav = styled.div`
 `;
 
 const SideNavResponsive = styled.div`
-		height: 100px; 
+		height: 90px; 
 		width: 100%;
 		position: fixed;
 		z-index: 9999;
-		background-color: #222; 
-		overflow-x: hidden;
+		background-image: linear-gradient(#001936, #001f42, #001936);
+		overflow: hidden;
 		transition: 0.2s;
 
 		&.closed {
-			height: 40px;
+			height: 45px;
 			transition: 0.2s;
 		}
 `
@@ -50,6 +50,7 @@ export const SideBar = () => {
 					matches.small ? (
 						<SideNavResponsive className={collapse ? 'closed' : ''}>
 							<Toggle />
+							<Menus />
 						</SideNavResponsive>
 					) : (
 							<SideNav className={collapse ? 'closed' : ''}>
@@ -61,7 +62,6 @@ export const SideBar = () => {
 						)
 				}
 			</Media>
-
 		</>
 	)
 }
