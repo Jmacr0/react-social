@@ -1,19 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Container, Row, Col, Card, Jumbotron } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import akihabara from '../../images/akihabara.jpg';
 import { Search } from '../Search/Search';
-import { CategoryContext } from '../../utils/CategoryContext';
 
 export const Category = () => {
-	const { onChange } = useContext(CategoryContext);
-	const [redirect, setRedirect] = useState();
+
+	const history = useHistory();
 
 	const categories = [
-		{
-			name: 'New',
-			colour: 'danger',
-		},
 		{
 			name: 'All',
 			colour: 'info',
@@ -32,8 +27,7 @@ export const Category = () => {
 		}];
 
 	const handleSelection = (clickedCategory) => {
-		onChange(clickedCategory);
-		setRedirect('/feed');
+		history.push(`/feed/${clickedCategory}`);
 	}
 
 	return (
@@ -77,7 +71,6 @@ export const Category = () => {
 					</Row>
 				})}
 			</Container>
-			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
 	)
 }
