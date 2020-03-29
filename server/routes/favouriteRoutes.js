@@ -5,6 +5,9 @@ router.route('/new')
 	.post(favouriteController.saveNew)
 
 router.route('/remove')
-	.delete(favouriteController.removeFavourite)
+	.patch(favouriteController.removeFavourite)
+
+router.route('/getAll')
+	.get(favouriteController.getAllUserFavourites)
 
 module.exports = router;
