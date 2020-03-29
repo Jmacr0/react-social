@@ -12,7 +12,8 @@ export default {
 	},
 	saveUser: async function (newUser) {
 		const response = await axios.post("/api/user/new", newUser);
-		return response;
+		console.log('api res!...', response)
+		return response.data;
 	},
 	updateUser: async function (updateUser) {
 		const response = await axios.patch("/api/user", updateUser);

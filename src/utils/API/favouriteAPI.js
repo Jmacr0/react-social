@@ -7,8 +7,13 @@ export default {
 		return response.data;
 	},
 	removeFavourite: async function (removeFavourite) {
-		const response = await axios.delete('/api/favourite/remove', removeFavourite, { withCredentials: true });
+		const response = await axios.patch('/api/favourite/remove', removeFavourite, { withCredentials: true });
 		console.log(response.data)
 		return response.data;
+	},
+	getFavouriteReviews: async () => {
+		const response = await axios.get('/api/favourite/getAll');
+		console.log(response.data.favourites)
+		return response.data.favourites;
 	}
 }
