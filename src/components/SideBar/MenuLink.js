@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ToggleContext } from '../../utils/ToggleContext';
+import Media from 'react-media';
 
 const LinkStyle = styled.div`
 	.link {
@@ -16,13 +17,35 @@ const LinkStyle = styled.div`
 		white-space: nowrap;
 		
 		&:hover {
-			background-color: #333;
-			color: red;
+			background-color: #00346e;
+			color: #ccefff;
 		}
 
 		&:focus {
-			background-color: #333;
-			border-left: 3px solid red;
+			background-color: #00346e;
+			border-left: 3px solid blue;
+		}
+	}
+`
+
+const LinkStyleSmall = styled.span`
+	.link {
+		padding: 6px 8px 6px 16px;
+		text-decoration: none;
+		font-size: 20px;				
+		cursor: pointer;
+		color: white;
+		transition-duration: 0.4s;
+		white-space: nowrap;
+		
+		&:hover {
+			background-color: #00346e;
+			color: #ccefff;
+		}
+
+		&:focus {
+			background-color: #00346e;
+			border-left: 3px solid blue;
 		}
 	}
 `
@@ -30,29 +53,42 @@ const LinkStyle = styled.div`
 export const MenuLink = ({ value, link, onLogout, iconStyle }) => {
 	const { collapse } = useContext(ToggleContext);
 
-	const linkType = link ?
-		(
-			<>
-				<Link to={link} replace className='link'>
-					<FontAwesomeIcon icon={iconStyle} className='mr-2' />
-					{collapse ? '' : value}
-				</Link>
-			</>
-		) :
-		(
-			<>
-				<Link to='' onClick={() => onLogout()} className='link'>
-					<FontAwesomeIcon icon={iconStyle} className='mr-2' />
-					{collapse ? '' : value}
-				</Link>
-			</>
-		)
+	const linkType =
+		<>
+			<Link to={link ? link : ''} onClick={(onLogout ? () => onLogout() : '')} replace className='link'>
+				<FontAwesomeIcon icon={iconStyle} className='mr-2' />
+				<Media queries={{ small: { maxWidth: 599 } }}>
+					{matches =>
+						matches.small ? (
+							''
+						) : (
+								<>
+									{collapse ? '' : value}
+								</>
+							)
+					}
+				</Media>
+			</Link>
+		</>
+
 
 	return (
-		<>
-			<LinkStyle>
-				{linkType}
-			</LinkStyle>
-		</>
+		<Media queries={{ small: { maxWidth: 599 } }}>
+			{matches =>
+				matches.small ? (
+					<>
+						<LinkStyleSmall>
+							{linkType}
+						</LinkStyleSmall>
+					</>
+				) : (
+						<>
+							<LinkStyle>
+								{linkType}
+							</LinkStyle>
+						</>
+					)
+			}
+		</Media>
 	)
 }
