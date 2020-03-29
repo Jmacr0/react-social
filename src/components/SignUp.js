@@ -42,7 +42,14 @@ export const SignUp = ({ onAuthenticate }) => {
 				confirmPassword
 			}
 			API.user.saveUser(newUser)
-				.then(success => {
+				.then(response => {
+					if (response.type === 'danger') {
+						setAlert({
+							message: response.message,
+							type: response.type
+						});
+						return
+					}
 					setAlert({
 						message: 'Successfully Signed Up!',
 						type: 'success'
@@ -81,10 +88,30 @@ export const SignUp = ({ onAuthenticate }) => {
 	}
 
 	return (
-		<Container>
+		<Container className='mt-4 text-center'>
+			<Row>
+				<Col>
+					<h1
+						data-aos="fade-down"
+						data-aos-duration="500"
+					>ReviewMe</h1>
+				</Col>
+			</Row>
 			<Row>
 				<Col md={{ span: 8, offset: 2 }}>
-					<Form onSubmit={handleSubmit} className='shadow'>
+					<Button
+						variant='info btn-block rounded-0'
+						onClick={() => {
+							setToggleLogin(toggleLogin ? false : true)
+							setUsername('');
+							setEmail('');
+							setPassword('');
+							setConfirmPassword('');
+						}
+						}>
+						{toggleLogin ? 'New User? Signup here!' : 'Existing User? Login here!'}
+					</Button>
+					<Form onSubmit={handleSubmit} className='shadow' style={{ backgroundColor: '#00346e' }}>
 						{alert.type ? (
 							<Row>
 								<Col>
@@ -95,20 +122,8 @@ export const SignUp = ({ onAuthenticate }) => {
 							</Row>
 						) : ''
 						}
-						<Row className='px-3 pb-3'>
+						<Row className='p-3'>
 							<Col>
-								<Button
-									variant='info'
-									onClick={() => {
-										setToggleLogin(toggleLogin ? false : true)
-										setUsername('');
-										setEmail('');
-										setPassword('');
-										setConfirmPassword('');
-									}
-									}>
-									{toggleLogin ? 'New User? Signup here!' : 'Existing User? Login here!'}
-								</Button>
 								{toggleLogin ? (
 									<>
 										<h2>Login</h2>
@@ -120,9 +135,9 @@ export const SignUp = ({ onAuthenticate }) => {
 											<Form.Label>Password</Form.Label>
 											<Form.Control type="password" value={password || ''} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
 										</Form.Group>
-										<Form.Group controlId="formBasicCheckbox">
+										{/* <Form.Group controlId="formBasicCheckbox">
 											<Form.Check type="checkbox" label='Remember Me' />
-										</Form.Group>
+										</Form.Group> */}
 									</>
 								) : (
 										<>
@@ -153,6 +168,16 @@ export const SignUp = ({ onAuthenticate }) => {
 					</Form>
 				</Col>
 			</Row>
+			<div class="book">
+				<div class="back"></div>
+				<div class="page6"></div>
+				<div class="page5"></div>
+				<div class="page4"></div>
+				<div class="page3"></div>
+				<div class="page2"></div>
+				<div class="page1"></div>
+				<div class="front"></div>
+			</div>
 			{redirect ? <Redirect to={redirect} /> : ''}
 		</Container >
 	)
