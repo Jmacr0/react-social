@@ -13,6 +13,12 @@ router.route('/all/search/:search')
 router.route('/new')
 	.post(reviewController.saveNew)
 
+router.route('/update')
+	.patch(reviewController.updateOne)
+
+router.route('/delete')
+	.delete(reviewController.deleteOne)
+
 router.route('/one/:id')
 	.get(reviewController.findOne)
 
