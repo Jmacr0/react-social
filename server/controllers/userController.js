@@ -28,6 +28,9 @@ module.exports = {
 			email
 		})
 			.then(user => {
+				if (!user) {
+					res.status(200).json(null);
+				}
 				let isLogged = {
 					currentUser: false
 				};
@@ -43,6 +46,15 @@ module.exports = {
 	},
 	findUser: (req, res) => {
 		db.User.findById(req.user.id)
+			.populate({
+				path: 'reviews',
+				populate: {
+					path: 'author',
+					model: 'User'
+				}
+
+			})
+			.populate('favourites')
 			.then(user => {
 				res.status(200).json(user);
 			}).catch(err => {
@@ -78,7 +90,7 @@ module.exports = {
 				})
 					.then(updatedUser => {
 						res.status(200).json({
-							message: 'Succesfully updated!',
+							message: 'Password succesfully updated!',
 							type: 'success'
 						});
 					})
@@ -96,10 +108,11 @@ module.exports = {
 	saveNew: ({ body: { username, email, password } }, res) => {
 		db.User.findOne({
 			username,
+			email,
 		})
 			.then(async (user) => {
 				if (user) {
-					console.log('Username already Exists!')
+					console.log('Username or Email already Exists!')
 					return;
 				}
 				const hashedPassword = bcrypt.hashSync(password, 10);
@@ -116,6 +129,10 @@ module.exports = {
 			})
 			.catch(err => {
 				console.log(err);
+				res.json({
+					message: 'Username or Email already Exists!',
+					type: 'danger'
+				})
 			})
 	}
 }

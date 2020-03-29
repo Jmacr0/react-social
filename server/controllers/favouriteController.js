@@ -35,34 +35,56 @@ module.exports = {
 	},
 	removeFavourite: async (req, res) => {
 		try {
-			console.log('start try!')
 			const { author, review } = req.body;
+			console.log('unfavouriting.....')
 			console.log(author, review)
-			const newFavourite = await db.Favourite
-				.create({
-					review,
-					author,
-				});
-			console.log('new-favourite: ', newFavourite)
-			const favouriteUser = await db.User
+			const unfavouriteFavourite = await db.Favourite.findOne({
+				author,
+				review
+			})
+				.remove()
+				.exec();
+			const { _id } = unfavouriteFavourite;
+			console.log(unfavouriteFavourite);
+			const unfavouriteUser = await db.User
 				.findByIdAndUpdate(author, {
-					$push: {
-						favourites: newFavourite
+					$pull: {
+						favourites: { _id }
 					}
 				}, {
-					new: true
+					multi: true
 				});
-			const favouriteReview = await db.Review
+			const unfavouriteReview = await db.Review
 				.findByIdAndUpdate(review, {
-					$push: {
-						favourites: newFavourite
+					$pull: {
+						favourites: { _id }
 					}
 				}, {
-					new: true
+					multi: true
 				});
-			res.status(200).json(newFavourite);
+			res.status(200).json(unfavouriteFavourite);
 		} catch (err) {
 			res.status(500);
+		}
+	},
+	getAllUserFavourites: async (req, res) => {
+		try {
+			const userFavourites = await db.User.findById(req.user.id)
+				.populate({
+					path: 'favourites',
+					populate: {
+						path: 'review',
+						model: 'Review',
+						populate: {
+							path: 'favourites',
+							model: 'Favourite'
+						}
+					}
+				})
+			console.log(userFavourites);
+			res.status(200).json(userFavourites);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 }
