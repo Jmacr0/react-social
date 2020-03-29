@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SideBar } from './SideBar/SideBar';
 import { ToggleContext } from '../utils/ToggleContext';
 import { Navigation } from './Navigation/Navigation';
-import { CategoryContext } from '../utils/CategoryContext';
+import { SearchContext } from '../utils/SearchContext';
 import { UserContext } from '../utils/UserContext';
 import { useEffect } from 'react';
 import API from '../utils/API';
@@ -16,14 +16,10 @@ export const Home = () => {
 		}
 	});
 
-	const [categoryState, setCategoryState] = useState({
-		selection: '',
+	const [searchState, setSearchState] = useState({
 		search: '',
-		onChange: (selection) => {
-			setCategoryState({ ...categoryState, selection, search: '' });
-		},
 		onSearch: (search) => {
-			setCategoryState({ ...categoryState, search, selection: '' })
+			setSearchState({ ...searchState, search })
 		}
 	});
 
@@ -37,40 +33,40 @@ export const Home = () => {
 		reviews: [],
 		favourites: [],
 		comments: [],
+		loadUser: async () => {
+			const currentUser = await API.user.getCurrentUser();
+			console.log('loaded user: ', currentUser)
+			const { _id, username, email, bio, img, experience, reviews, favourites, comments } = currentUser;
+			setUserState({
+				...userState,
+				id: _id,
+				username,
+				email,
+				bio,
+				img,
+				experience,
+				reviews,
+				favourites,
+				comments,
+			});
+			console.log(username)
+		}
 	});
 
-	const loadUser = async () => {
-		const currentUser = await API.user.getCurrentUser();
-		console.log('loaded user: ', currentUser)
-		const { _id, username, email, bio, img, experience, reviews, favourites, comments } = currentUser;
-		setUserState({
-			id: _id,
-			username,
-			email,
-			bio,
-			img,
-			experience,
-			reviews,
-			favourites,
-			comments,
-		});
-		console.log(username)
-	}
-
 	useEffect(() => {
-		loadUser();
+		userState.loadUser();
 	}, [])
 
 
 	return (
 		<ToggleContext.Provider value={toggleState}>
-			<CategoryContext.Provider value={categoryState}>
+			<SearchContext.Provider value={searchState}>
 				<UserContext.Provider value={userState}>
 					<Navigation />
 					<SideBar />
 					<Main />
 				</UserContext.Provider>
-			</CategoryContext.Provider>
+			</SearchContext.Provider>
 		</ToggleContext.Provider >
 	)
 }
