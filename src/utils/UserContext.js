@@ -11,4 +11,5 @@ export const UserContext = React.createContext({
 	reviews: [],
 	favourites: [],
 	comments: [],
+	loadUser: () => undefined
 });
