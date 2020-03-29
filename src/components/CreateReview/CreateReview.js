@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Form, Container, Button, Row, Col, Dropdown } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Form, Container, Button, Row, Col, Dropdown, Alert } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import API from '../../utils/API';
+import { useContext } from 'react';
+import { UserContext } from '../../utils/UserContext';
 
 export const CreateReview = () => {
+	const { loadUser } = useContext(UserContext);
 	const [item, setItem] = useState('');
 	const [title, setTitle] = useState('');
 	const [rating, setRating] = useState('');
@@ -16,28 +19,53 @@ export const CreateReview = () => {
 	const [img, setImg] = useState('');
 	const [description, setDescription] = useState('');
 
-	const [redirect, setRedirect] = useState();
+	const [alert, setAlert] = useState('');
+
+	const history = useHistory();
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
-		const { category } = categoryType;
-		const newReview = {
-			item,
-			title,
-			rating,
-			category,
-			pros,
-			cons,
-			img,
-			description
+		try {
+			event.preventDefault();
+			if (!item || !title || !rating || !categoryType || !description) {
+				setAlert({
+					message: 'Please fill out all * fields.',
+					type: 'warning'
+				})
+				return;
+			}
+			const { category } = categoryType;
+			const newReview = {
+				item,
+				title,
+				rating,
+				category,
+				pros,
+				cons,
+				description
+			}
+			if (img) {
+				newReview.img = img;
+			}
+			const result = await API.review.saveReview(newReview);
+			setAlert({
+				message: 'Successfully created Review.',
+				type: 'success'
+			});
+			setTimeout(() => {
+				history.push('/profile');
+			}, 1500);
+			loadUser();
+			return;
+		} catch (err) {
+			console.log(err);
 		}
-		const response = await API.review.saveReview(newReview);
-		setRedirect(response);
+
+
 	}
 
 	return (
 		<>
-			<Container className='shadow p-3'>
+			<Container className='shadow p-3' style={{ backgroundColor: '#00346e' }}>
 				<h2>New Review</h2>
 				<hr />
 				<Form onSubmit={handleSubmit}>
@@ -111,10 +139,19 @@ export const CreateReview = () => {
 						<Form.Label>Your Review *</Form.Label>
 						<Form.Control as="textarea" rows="4" placeholder="Great sound but doesn't offer the best value propostion. Other similar quality earphones for much cheaper." value={description} onChange={e => setDescription(e.target.value)} />
 					</Form.Group>
+					{alert.type ? (
+						<Row>
+							<Col>
+								<Alert variant={alert.type}>
+									{alert.message}
+								</Alert>
+							</Col>
+						</Row>
+					) : ''
+					}
 					<Button type='submit'>Save</Button>
 				</Form>
 			</Container>
-			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
 	)
 }
