@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import API from '../../utils/API';
+import { UserContext } from '../../utils/UserContext';
 
 export const ProfileEdit = () => {
 	const [toggleEdit, setToggleEdit] = useState(true);
+	const { loadUser } = useContext(UserContext);
 
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
@@ -58,7 +60,13 @@ export const ProfileEdit = () => {
 						message: 'Details updated successfully.',
 						type: 'success'
 					});
-					setRedirect('/profile');
+					setTimeout(() => {
+						setAlert({
+							message: '',
+							type: ''
+						});
+					}, 1000);
+					loadUser();
 					return;
 				}
 			}
@@ -79,25 +87,31 @@ export const ProfileEdit = () => {
 					return;
 				}
 				const update = await API.user.updateUserPassword({ currentPassword, newPassword });
-				console.log('front end: ', update)
 				setAlert({
 					message: update.message,
 					type: update.type
 				});
+				setTimeout(() => {
+					setAlert({
+						message: '',
+						type: ''
+					});
+				}, 1000);
+				loadUser();
 				return;
 
 			}
 		} catch (err) {
 			console.log(err.message)
-			// setAlert({
-			// 	message: err,
-			// 	type: 'danger'
-			// });
+			setAlert({
+				message: 'Failed to update. Try again.',
+				type: 'danger'
+			});
 			return;
 		}
 	}
 
-	const loadUser = async () => {
+	const setUser = async () => {
 		const foundUser = await API.user.getCurrentUser();
 		const { username, email, bio, img } = foundUser;
 		setUsername(username);
@@ -107,12 +121,12 @@ export const ProfileEdit = () => {
 	}
 
 	useEffect(() => {
-		loadUser();
+		setUser();
 	}, [])
 
 	return (
 		<>
-			<Container fluid>
+			<Container style={{ backgroundColor: '#00346e' }} fluid>
 				<Row>
 					<Col>
 						<Form onSubmit={handleSubmit} className='shadow'>

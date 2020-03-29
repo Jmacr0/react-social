@@ -14,7 +14,7 @@ const IconStyle = styled.div`
 		transition-duration: 0.2s;
 		white-space: nowrap;
 		&:hover {
-			background-color: #303030;
+			background-color: #012f64;
 		}
 	}	
 `

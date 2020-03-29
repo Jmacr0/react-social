@@ -1,14 +1,20 @@
 body {
 	margin: 0;
+	color: white;
 	font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: #001936;
 }
 
-h1 {
-	color: red;
+.my-modal-width {
+	max-width: 300px;
 }
 
-h4 {
-	color: #303030;
-}
+/* h4 {
+	color: #ccefff;
+	background-color: #c5a800;
+	color: #ff4444;
+	color: #ff4f4f;
+	background-image: linear-gradient(#001936, #00346e, #002857);
+} */

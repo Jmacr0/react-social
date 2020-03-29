@@ -15,10 +15,9 @@ export const Menus = () => {
 
 	return (
 		<>
-			<hr />
-			<MenuLink iconStyle={faUser} iconeSty value={'PROFILE'} link={'/profile'} />
+			<MenuLink iconStyle={faUser} value={'PROFILE'} link={'/profile'} />
 			<MenuLink iconStyle={faNewspaper} value={'NEW REVIEW'} link={'/review/new'} />
-			<MenuLink iconStyle={faHeart} value={'MY FAVOURITES'} link={'/'} />
+			<MenuLink iconStyle={faHeart} value={'MY FAVOURITES'} link={'/favourites'} />
 			<MenuLink iconStyle={faCog} value={'LOGOUT'} onLogout={handleLogout} />
 			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
