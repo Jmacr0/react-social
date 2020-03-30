@@ -4,37 +4,18 @@
 	"private": true,
 	"proxy": "http://localhost:3001",
 	"dependencies": {
-		"@fortawesome/fontawesome-svg-core": "^1.2.27",
-		"@fortawesome/free-regular-svg-icons": "^5.12.1",
-		"@fortawesome/free-solid-svg-icons": "^5.12.1",
-		"@fortawesome/react-fontawesome": "^0.1.8",
-		"@testing-library/jest-dom": "^4.2.4",
-		"@testing-library/react": "^9.4.1",
-		"@testing-library/user-event": "^7.2.1",
-		"aos": "^2.3.4",
 		"axios": "^0.19.2",
 		"bcryptjs": "^2.4.3",
-		"bootstrap": "^4.4.1",
 		"cookie-parser": "^1.4.4",
 		"express-session": "^1.17.0",
 		"mongoose": "^5.9.3",
 		"passport": "^0.4.1",
-		"passport-local": "^1.0.0",
-		"react": "^16.13.0",
-		"react-bootstrap": "^1.0.0-beta.17",
-		"react-dom": "^16.13.0",
-		"react-media": "^1.10.0",
-		"react-router-dom": "^5.1.2",
-		"react-scripts": "3.4.0",
-		"react-text-truncate": "^0.16.0",
-		"styled-components": "^5.0.1"
+		"passport-local": "^1.0.0"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"start:be": "nodemon ./server/server.js",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"start": "cd client && npm start",
+		"server": "nodemon ./server.js",
+		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
