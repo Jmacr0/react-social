@@ -13,7 +13,7 @@
 		"passport-local": "^1.0.0"
 	},
 	"scripts": {
-		"start": "cd client && npm start",
+		"start": "cross-env NODE_ENV=production MONGO_URL=mongodb://heroku_618kqw48:oolbb3dh84sesrp0ftghnank32@ds139072.mlab.com:39072/heroku_618kqw48 node server.js",
 		"server": "nodemon ./server.js",
 		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
