@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser('secret'));
 
 // Passport init
-require('./passport/passport').authenticate(passport);
+require('./config/passport').authenticate(passport);
 
 // Express Session
 app.use(session({

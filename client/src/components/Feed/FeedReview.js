@@ -24,7 +24,7 @@ export const FeedReview = ({
 		img,
 		favourites,
 		createdAt
-	}, noTruncate, loadReviews, loadReview }) => {
+	}, noTruncate, loadReviews, loadReview, loadFavourites }) => {
 
 	const { id, username, loadUser } = useContext(UserContext);
 	const history = useHistory();
@@ -59,6 +59,9 @@ export const FeedReview = ({
 		if (loadReview) {
 			loadReview();
 		}
+		if (loadFavourites) {
+			loadFavourites();
+		}
 	}
 	const toUnfavourite = async () => {
 		const removeFavourite = {
@@ -73,6 +76,9 @@ export const FeedReview = ({
 		}
 		if (loadReview) {
 			loadReview();
+		}
+		if (loadFavourites) {
+			loadFavourites();
 		}
 	}
 
@@ -89,6 +95,9 @@ export const FeedReview = ({
 		}
 		if (loadReview) {
 			history.push('/feed/All');
+		}
+		if (loadFavourites) {
+			loadFavourites();
 		}
 	}
 

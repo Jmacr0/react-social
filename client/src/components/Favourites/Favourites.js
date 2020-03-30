@@ -5,10 +5,6 @@ import { FeedReview } from '../Feed/FeedReview';
 
 export const Favourites = () => {
 	const [favouriteReviews, setFavouriteReviews] = useState([]);
-	// const descFavourites = React.useMemo(() => {
-	// 	return favourites.slice(0).reverse();
-	// }, [favourites]);
-
 
 	// console.log()
 	// const [descReviews, setDescReviews] = useState([]);
@@ -36,7 +32,7 @@ export const Favourites = () => {
 					<h2>My Favourites</h2>
 				</div>
 				{favouriteReviews.map((favourite, index) =>
-					<FeedReview review={favourite.review} key={index} />
+					<FeedReview review={favourite.review} loadFavourites={loadFavourites} key={index} />
 				)}
 			</Container>
 		</>
