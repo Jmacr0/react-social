@@ -5,13 +5,13 @@
 
 **Monash University Full Stack Flex Coding Bootcamp**
 
-**Live Version:** https://jmacr0.github.io/
+**Live Version:** https://me-review.herokuapp.com/
 
 *- Jon*
 
 ---
 
-## User Story
+## User Story 👤
 ```
 As A Consumer
 
@@ -20,65 +20,103 @@ I Want to find reviews on certain items
 So That I can make an informed purchase
 ```
 
-## Project Description
-The **ReviewMe** Application allows users to search for review. The user is provided input areas to filter results. Inputs include:
+## Project Description 📜
+The **ReviewMe** Application allows users to search for a review on different items. The user can search for a review by keyword, filter reviews by category, or show all reviews from newest to oldest:
 
+* All
 * Keywords
-* Title
-* Author
-* Genre
+* Category
 
- 
-Once the user proceeds to search, **ReadMe** provides the following for each book result:
+Depending on user selection, **ReviewMe** will display the matching results.
 
-* Book Image
-* Title
-* Author
-* Plot Summary
-
-The books are displayed eight at a time, and is paginated to five pages. A total of 40 books per search. Upon executing a new search, the previous search results are cleared.
-
-![desktop view](https://github.com/Jmacr0/project_one/raw/master/assets/image/desktop.JPG "Logo Title Text 1")
+![desktop view](https://github.com/Jmacr0/react-social/raw/master/client/src/images/readme-home.PNG "Logo Title Text 1")
 
 
-## Instructions
+## Instructions 👩‍🏫
 
-How to use the **ReadMe** Application:
+How to use the **ReviewMe** Application:
 
 ---
-1. Enter any combination of: *Keywords, Title, Author, Genre,* in the input area. Note, the more inputs, the narrower your search becomes.
+1. Create a New User. Then proceed to Login.
 ---
-2. To begin your search with the input, click the submit button.
+2. Once Redirected to the Homepage, User can navigate to different part of the application through two main features:
+ * SideBar
+ * Main Page 
 ---
-3. Once the search has completed, the results will display at the bottom of the page
----
-4. Books are displayed 8 per page, and is paginated to 5 pages, for a total of 40 books per search. User can go back and forth between pages.
----
-## Features
-
-#### Genre
-The Genre dropdown starts of empty. As the user begins to search, the Genre begins to populate. This is then saved on to local storage. When the user exits the application and re-opens, the Genre will repopulate with the previous. 
-
-#### Random
-
-The **ReadMe** Application includes a random feature which allows the user to search for a list of random books. This works by randomly selecting a word and using the returned word as a keyword input. 
+3. From the SideBar, the user can: 
+* View their profile page
+* Create a new review 
+* View their favourited reviews
+* Logout.
 
 ---
-## Resources
+4. The Main page is where the user will view the content. The default after login presents:
+* Search bar to search for a review by keyword
+* A selection of categories which returns all reviews that match
+---
+## Features 🌠
 
-**APIs**
+#### Authentication 🔐
 
-* To retrieve book information we used Google Books API https://developers.google.com/books
+**ReviewMe** incorporated user authentication through Passport.js. This library provides a method to validate user login and prevent unauthorized users from accessing certain routes.
 
-* To display the current Date and Time we used Moment.js https://momentjs.com
+#### Profile Management
+One of the main features of **ReviewMe** is profile management. The user can view their profile page which presents details about themselves along with a list of reviews which they have written.
 
-* To simplify our Javascript we used jQuery https://jquery.com
+The user can edit their profile including: changing their username, email, bio, and image (profile picture). The user can also change their password.
 
-* To use the random search button, we used a random word generator https://random-word-api.herokuapp.com/
+There is a ***My Favourites*** tab for the user to view a list of their favourites reviews.
+
+Once finished, the user can then logout and is redirect to the login page. 
+
+#### Review Creation
+
+Another primary feature of **ReviewMe** is the ability to create a new review which others are able to view and interact with. On the SideBar, the **New Review** tab redirects the user to a page where they can write a new review. Review include:
+
+* Item (name) *
+* Title (title of the review) *
+* Pros
+* Cons
+* Rating (1 - 5 ⭐'s) *
+* Category (type that the review item falls under, eg. technology) *
+* Image (currently URL only)
+* Description *
+
+*indicates mandatory fields.
+
+Once complete, user clicks save to create the review.
+
+
+#### Review Management
+
+The **ReviewMe** application allows the user to interact with the reviews on display.
+
+* The user can click to open the review. From here all comments linked to that review will show. The user can then create their own comment which will be added. All comments written by the user can be edited and/or deleted by the user.
+
+* If the user is the author of the review, they have the option to edit the review and/or delete the review.
+
+* The user can also favourite a review, from which the review will be added to their favourites and can be viewed in the ***My Favourites*** tab.
+
+---
+## Technologies 🎡
+
+**Libraries**
+
+* React.js for handling the front end
+
+* MongoDB / Mongoose for database
+
+* Node.js / Express.js to run API backend server
+
+* React Router DOM for React route handling
+
+* Passport.js for authentication
+
+* React-Bootstrap for styling and layout managment
 
 **CSS Framework**
 
-* To style the application we used Bulma https://bulma.io
+* To style the application I used Bootstrap https://getbootstrap.com
 
 
 
