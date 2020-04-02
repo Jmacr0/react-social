@@ -21,7 +21,7 @@ So That I can make an informed purchase
 ```
 
 ## Project Description 📜
-The **ReviewMe** Application allows users to search for a review on different items. The user can search for a review by keyword, filter reviews by category, or show all reviews from newest to oldest:
+**ReviewMe** is fullstack application that allows users to create nad search for a review on different items. The user can search for a review by keyword, filter reviews by category, or show all reviews - from newest to oldest:
 
 * All
 * Keywords
