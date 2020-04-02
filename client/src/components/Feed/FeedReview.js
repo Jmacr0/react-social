@@ -163,10 +163,12 @@ export const FeedReview = ({
 									{author.username === username && <Nav.Link onClick={handleShow} style={{ color: 'red', textDecoration: 'none' }}>DELETE</Nav.Link>}
 								</Nav.Item>
 								<Nav.Item className='ml-auto'>
-									{'⭐'.repeat(rating)}
+									<Nav.Link disabled>
+										{'⭐'.repeat(rating)}
+									</Nav.Link>
 								</Nav.Item>
 								<Nav.Item className='ml-auto'>
-									<Link to={`/review/one/${_id}`} style={{ color: 'white', textDecoration: 'none' }}>. . .</Link>
+									<Link to={`/review/one/${_id}`} className='nav-link' style={{ color: 'white', textDecoration: 'none' }}>. . .</Link>
 								</Nav.Item>
 							</Nav>
 						</Card.Header>
@@ -193,10 +195,10 @@ export const FeedReview = ({
 											description :
 											<TextTruncate
 												line={2}
-												element="p"
+												element="div"
 												truncateText="..."
 												text={description}
-												textTruncateChild={<Link to={`/review/one/${_id}`} style={{ color: '#0099ff', textDecoration: 'none' }}>see more</Link>} />
+												textTruncateChild={<Link to={`/review/one/${_id}`} style={{ color: '#c5c5c5', textDecoration: 'none' }}>see more</Link>} />
 										}
 									</Card.Text>
 								</Card.Body>

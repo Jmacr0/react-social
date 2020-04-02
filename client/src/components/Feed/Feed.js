@@ -7,10 +7,9 @@ import { useParams } from 'react-router-dom';
 import { UserContext } from '../../utils/UserContext';
 
 export const Feed = () => {
-	const { search } = useContext(SearchContext);
 	const [reviews, setReviews] = useState([]);
 
-	const { category } = useParams();
+	const { category, search } = useParams();
 	const { id } = useContext(UserContext);
 
 
@@ -22,7 +21,7 @@ export const Feed = () => {
 					setReviews(reviews);
 					return;
 				})
-		} else {
+		} else if (category) {
 			API.review.getReviewsOneType(category)
 				.then(reviews => {
 					console.log('certain type: ', reviews)
@@ -31,8 +30,10 @@ export const Feed = () => {
 				})
 		}
 		if (search) {
+			console.log('feed search: ', search)
 			API.review.getReviewsSearch(search)
 				.then(reviews => {
+					console.log('search...', reviews)
 					setReviews(reviews);
 					return;
 				})

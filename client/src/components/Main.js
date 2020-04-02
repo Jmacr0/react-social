@@ -44,6 +44,7 @@ export const Main = () => {
 			<Route exact path='/comment/one/edit/:id' component={CommentEdit} />
 			<Route exact path='/favourites' component={Favourites} />
 			<Route exact path='/feed/:category' component={Feed} />
+			<Route exact path='/feed/search/:search' component={Feed} />
 			<Route exact path='/' component={Category} />
 		</>
 	)

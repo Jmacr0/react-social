@@ -33,6 +33,8 @@ module.exports = {
 		db.Review.find({
 			'item': { "$regex": search, "$options": "i" }
 		})
+			.populate('favourites')
+			.populate('author')
 			.sort({ createdAt: 'desc' })
 			.then(allReviews => {
 				res.json(allReviews);
