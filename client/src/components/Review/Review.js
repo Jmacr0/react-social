@@ -20,7 +20,7 @@ export const Review = ({ match }) => {
 		favourites: [],
 		createdAt: '',
 		_v: ''
-	})
+	});
 
 	const [comment, setComment] = useState('');
 
@@ -47,9 +47,7 @@ export const Review = ({ match }) => {
 		loadReview();
 	}
 
-	useEffect(() => {
-		loadReview();
-	}, []);
+	useEffect(loadReview, []);
 
 	return (
 		<>

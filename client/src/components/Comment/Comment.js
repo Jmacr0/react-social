@@ -18,8 +18,8 @@ export const Comment = ({ value, onDelete }) => {
 			author: id,
 			review: comment.review
 		}
-		console.log(deleteComment);
 		const deleted = await API.comment.deleteComment(deleteComment);
+		console.log(deleted);
 		onDelete();
 		handleClose();
 	}

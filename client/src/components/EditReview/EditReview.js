@@ -36,6 +36,7 @@ export const EditReview = ({ match }) => {
 			event.preventDefault();
 			const updateReview = review;
 			const response = await API.review.updateReview(updateReview);
+			console.log(response);
 			setAlert({
 				message: 'Successfully updated !',
 				type: 'success'
@@ -72,13 +73,9 @@ export const EditReview = ({ match }) => {
 		}
 	}
 
-	useEffect(() => {
-		loadCardColour();
-	}, [review.category]);
+	useEffect(loadCardColour, [review.category]);
 
-	useEffect(() => {
-		loadReview();
-	}, []);
+	useEffect(loadReview, []);
 
 	return (
 		<>

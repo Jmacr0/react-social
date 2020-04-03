@@ -1,12 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { SearchContext } from '../../utils/SearchContext';
 
 export const Search = ({ main }) => {
-	const { onSearch } = useContext(SearchContext);
-	const [redirect, setRedirect] = useState();
 	const [searchTerm, setSearchTerm] = useState();
 
 	const handleKeyDown = (e) => {

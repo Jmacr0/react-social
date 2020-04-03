@@ -28,9 +28,7 @@ function App() {
 	}, [])
 
 	return (
-		<>
 			<Router>
-				<>
 					<Switch>
 						<Route
 							exact path='/sign-up'
@@ -39,9 +37,7 @@ function App() {
 						{authenticated ? <Route path='/' component={Home} /> : <Redirect to='/sign-up' />}
 						<Route path='*' component={NoMatch} />
 					</Switch>
-				</>
 			</Router>
-		</>
 	);
 }
 

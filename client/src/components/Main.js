@@ -1,4 +1,7 @@
 import React, { useContext } from 'react'
+import { ToggleContext } from '../utils/ToggleContext';
+import Media from 'react-media';
+import styled from 'styled-components';
 import { Review } from './Review/Review';
 import { CreateReview } from './CreateReview/CreateReview';
 import { ProfileEdit } from './Profile/ProfileEdit';
@@ -9,9 +12,7 @@ import { Feed } from './Feed/Feed';
 import { EditReview } from './EditReview/EditReview';
 import { CommentEdit } from './Comment/CommentEdit';
 import { Favourites } from './Favourites/Favourites';
-import styled from 'styled-components';
-import { ToggleContext } from '../utils/ToggleContext';
-import Media from 'react-media';
+
 
 
 const ContentRight = styled.div`

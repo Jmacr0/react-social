@@ -88,6 +88,7 @@ export const FeedReview = ({
 			author: id
 		}
 		const deleted = await API.review.deleteReview(deleteReview);
+		console.log(deleted);
 		handleClose();
 		loadUser();
 		if (loadReviews) {
@@ -120,9 +121,7 @@ export const FeedReview = ({
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	useEffect(() => {
-		loadCardColour();
-	}, [category]);
+	useEffect(loadCardColour, [category]);
 
 	return (
 		<Row className='py-2'>

@@ -46,7 +46,8 @@ export const CreateReview = () => {
 			if (img) {
 				newReview.img = img;
 			}
-			const result = await API.review.saveReview(newReview);
+			const response = await API.review.saveReview(newReview);
+			console.log(response);
 			setAlert({
 				message: 'Successfully created Review.',
 				type: 'success'
@@ -59,8 +60,6 @@ export const CreateReview = () => {
 		} catch (err) {
 			console.log(err);
 		}
-
-
 	}
 
 	return (

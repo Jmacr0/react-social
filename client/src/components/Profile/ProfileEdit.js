@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import API from '../../utils/API';
 import { UserContext } from '../../utils/UserContext';
 
-export const ProfileEdit = () => {
-	const [toggleEdit, setToggleEdit] = useState(true);
+export const ProfileEdit = () => {	
 	const { loadUser } = useContext(UserContext);
 
+	const [toggleEdit, setToggleEdit] = useState(true);
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [currentPassword, setCurrentPassword] = useState('');
@@ -20,8 +19,6 @@ export const ProfileEdit = () => {
 		message: '',
 		type: ''
 	});
-
-	const [redirect, setRedirect] = useState();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -192,7 +189,6 @@ export const ProfileEdit = () => {
 					</Col>
 				</Row>
 			</Container >
-			{redirect ? <Redirect to={redirect} /> : ''}
 		</>
 	)
 }

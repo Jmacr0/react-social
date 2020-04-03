@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Jumbotron, Container, Row, Col, Badge } from 'react-bootstrap';
+import React from 'react';
+import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import API from '../../utils/API';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';

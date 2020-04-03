@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SideBar } from './SideBar/SideBar';
 import { ToggleContext } from '../utils/ToggleContext';
 import { Navigation } from './Navigation/Navigation';
-import { SearchContext } from '../utils/SearchContext';
 import { UserContext } from '../utils/UserContext';
-import { useEffect } from 'react';
 import API from '../utils/API';
 import { Main } from './Main';
 
@@ -13,13 +11,6 @@ export const Home = () => {
 		collapse: false,
 		onClick: (collapse) => {
 			setToggleState({ ...toggleState, collapse });
-		}
-	});
-
-	const [searchState, setSearchState] = useState({
-		search: '',
-		onSearch: (search) => {
-			setSearchState({ ...searchState, search })
 		}
 	});
 
@@ -53,20 +44,15 @@ export const Home = () => {
 		}
 	});
 
-	useEffect(() => {
-		userState.loadUser();
-	}, [])
-
+	useEffect(userState.loadUser, []);
 
 	return (
 		<ToggleContext.Provider value={toggleState}>
-			<SearchContext.Provider value={searchState}>
-				<UserContext.Provider value={userState}>
-					<Navigation />
-					<SideBar />
-					<Main />
-				</UserContext.Provider>
-			</SearchContext.Provider>
+			<UserContext.Provider value={userState}>
+				<Navigation />
+				<SideBar />
+				<Main />
+			</UserContext.Provider>
 		</ToggleContext.Provider >
 	)
 }

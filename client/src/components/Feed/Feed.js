@@ -1,16 +1,12 @@
-import React, { useContext, useEffect, useState, } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import API from '../../utils/API';
 import { FeedReview } from './FeedReview';
-import { Container } from 'react-bootstrap';
-import { SearchContext } from '../../utils/SearchContext';
-import { useParams } from 'react-router-dom';
-import { UserContext } from '../../utils/UserContext';
 
 export const Feed = () => {
 	const [reviews, setReviews] = useState([]);
-
 	const { category, search } = useParams();
-	const { id } = useContext(UserContext);
 
 
 	const loadReviews = () => {
@@ -59,21 +55,17 @@ export const Feed = () => {
 	// 	this.setReviews(newReviews);
 	// };
 
-	useEffect(() => {
-		loadReviews();
-	}, [search, category]);
+	useEffect(loadReviews, [search, category]);
 
 	return (
-		<>
-			<Container style={{ backgroundColor: '#00346e' }} fluid>
-				{reviews.map((review, index) =>
-					<FeedReview
-						review={review}
-						loadReviews={loadReviews}
-						// handleFavouriteChange={handleFeedReviewFavouriteChange}
-						key={index} />
-				)}
-			</Container>
-		</>
+		<Container style={{ backgroundColor: '#00346e' }} fluid>
+			{reviews.map((review, index) =>
+				<FeedReview
+					review={review}
+					loadReviews={loadReviews}
+					// handleFavouriteChange={handleFeedReviewFavouriteChange}
+					key={index} />
+			)}
+		</Container>
 	)
 }

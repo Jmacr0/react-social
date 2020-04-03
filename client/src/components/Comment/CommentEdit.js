@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Container, Button, Row, Col, Dropdown, Alert } from 'react-bootstrap';
+import { Form, Container, Button, Row, Col, Alert } from 'react-bootstrap';
 import API from '../../utils/API';
 
 export const CommentEdit = ({ match }) => {
@@ -17,13 +17,13 @@ export const CommentEdit = ({ match }) => {
 		message: '',
 		type: ''
 	});
-	const [redirect, setRedirect] = useState();
 
 	const handleSubmit = async (event) => {
 		try {
 			event.preventDefault();
 			const updateComment = comment;
 			const response = await API.comment.updateComment(updateComment);
+			console.log(response);
 			setAlert({
 				message: 'Successfully updated !',
 				type: 'success'
@@ -44,10 +44,7 @@ export const CommentEdit = ({ match }) => {
 		setComment(result);
 	}
 
-	useEffect(() => {
-		console.log(match.params.id)
-		loadComment();
-	}, []);
+	useEffect(loadComment, []);
 
 	return (
 		<>
