@@ -3,7 +3,7 @@ import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import API from '../../utils/API';
 import { UserContext } from '../../utils/UserContext';
 
-export const ProfileEdit = () => {	
+export const ProfileEdit = () => {
 	const { loadUser } = useContext(UserContext);
 
 	const [toggleEdit, setToggleEdit] = useState(true);
@@ -24,6 +24,10 @@ export const ProfileEdit = () => {
 		e.preventDefault();
 		try {
 			if (toggleEdit) {
+				setAlert({
+					message: '',
+					type: ''
+				});
 				// save details
 				if (!username || !email || !bio || !img) {
 					setAlert({
@@ -57,17 +61,15 @@ export const ProfileEdit = () => {
 						message: 'Details updated successfully.',
 						type: 'success'
 					});
-					setTimeout(() => {
-						setAlert({
-							message: '',
-							type: ''
-						});
-					}, 1000);
 					loadUser();
 					return;
 				}
 			}
 			if (!toggleEdit) {
+				setAlert({
+					message: '',
+					type: ''
+				});
 				// save password
 				if (!newPassword || !confirmNewPassword) {
 					setAlert({
