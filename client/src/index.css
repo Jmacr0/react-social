@@ -7,8 +7,18 @@ body {
 	background-color: #001936;
 }
 
+a, a:hover {
+	color: white;
+}
+
 .my-modal-width {
 	max-width: 300px;
+	margin: auto;
+	color: white;
+}
+
+.close, .close:hover {
+	color: white;
 }
 
 /* h4 {

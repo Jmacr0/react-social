@@ -45,31 +45,37 @@ const LinkStyleSmall = styled.span`
 
 		&:focus {
 			background-color: #00346e;
-			border-left: 3px solid blue;
+			border-bottom: 3px solid blue;
 		}
 	}
 `
 
-export const MenuLink = ({ value, link, onLogout, iconStyle }) => {
+export const MenuLink = ({ value, link, onShow, iconStyle }) => {
 	const { collapse } = useContext(ToggleContext);
 
 	const linkType =
-		<>
-			<Link to={link ? link : ''} onClick={(onLogout ? () => onLogout() : '')} replace className='link'>
-				<FontAwesomeIcon icon={iconStyle} className='mr-2' />
-				<Media queries={{ small: { maxWidth: 599 } }}>
-					{matches =>
-						matches.small ? (
-							''
-						) : (
-								<>
-									{collapse ? '' : value}
-								</>
-							)
-					}
-				</Media>
-			</Link>
-		</>
+		<Link
+			to={link ? link : ''}
+			onClick={(onShow && onShow)}
+			className='link'
+			replace
+		>
+			<FontAwesomeIcon
+				icon={iconStyle}
+				className='mr-2'
+			/>
+			<Media queries={{ small: { maxWidth: 599 } }}>
+				{matches =>
+					matches.small ? (
+						''
+					) : (
+							<>
+								{collapse ? '' : value}
+							</>
+						)
+				}
+			</Media>
+		</Link>
 
 
 	return (

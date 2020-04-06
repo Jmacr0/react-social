@@ -25,7 +25,7 @@ const SideNav = styled.div`
 `;
 
 const SideNavResponsive = styled.div`
-		height: 90px; 
+		height: 80px; 
 		width: 100%;
 		position: fixed;
 		z-index: 9999;
@@ -34,7 +34,7 @@ const SideNavResponsive = styled.div`
 		transition: 0.2s;
 
 		&.closed {
-			height: 45px;
+			height: 40px;
 			transition: 0.2s;
 		}
 `
