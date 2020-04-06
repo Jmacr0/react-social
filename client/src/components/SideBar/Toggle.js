@@ -9,6 +9,7 @@ const IconStyle = styled.div`
 	&& {
 		color: white;
 		font-size: 30px;
+		height: 40px;
 		width: 200px;
 		cursor: pointer;
 		transition-duration: 0.2s;
