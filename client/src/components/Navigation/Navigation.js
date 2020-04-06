@@ -59,15 +59,15 @@ export const Navigation = () => {
 						<NavStyle style={{ width: '100%' }}>
 							<Container fluid>
 								<Row>
-									<div
-										className="mr-auto search"
-										style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
-										<Search />
-									</div>
 									<div>
 										<Link to='/' replace>
 											<FontAwesomeIcon icon={faHome} className='homeIcon' />
 										</Link>
+									</div>
+									<div
+										className="ml-auto mr-2 search"
+										style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
+										<Search />
 									</div>
 								</Row>
 							</Container>
@@ -83,12 +83,7 @@ export const Navigation = () => {
 							<NavStyle style={{ width: '100%' }}>
 								<Container fluid>
 									<Row>
-										<div
-											className="mr-auto search"
-											style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
-											<Search />
-										</div>
-										<div className='ml-auto' style={{
+										<div className='mr-auto' style={{
 											display: 'flex',
 											alignItems: 'center'
 										}}>
@@ -98,6 +93,11 @@ export const Navigation = () => {
 												ReviewMe
 												</h3>
 											</Link>
+										</div>
+										<div
+											className="ml-auto search"
+											style={{ visibility: (location.pathname === '/' ? 'hidden' : 'visible') }}>
+											<Search />
 										</div>
 									</Row>
 								</Container>
