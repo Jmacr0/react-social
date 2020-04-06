@@ -20,8 +20,7 @@ module.exports = {
 		console.log(req.user)
 		res.status(200).json('/sign-up');
 	},
-	findOne: (req, res) => {
-		console.log('backend: ', req.body);
+	findExisting: (req, res) => {
 		const { username, email } = req.body;
 		db.User.findOne({
 			username,
@@ -44,7 +43,7 @@ module.exports = {
 				res.status(404).json(err);
 			})
 	},
-	findUser: (req, res) => {
+	findCurrentUser: (req, res) => {
 		db.User.findById(req.user.id)
 			.populate({
 				path: 'reviews',
@@ -55,6 +54,17 @@ module.exports = {
 
 			})
 			.populate('favourites')
+			.then(user => {
+				res.status(200).json(user);
+			}).catch(err => {
+				res.status(500).json(err);
+			})
+	},
+	findUserProfile: ({ params }, res) => {
+		db.User.findOne({
+			username: params.user
+		})
+			.populate('reviews')
 			.then(user => {
 				res.status(200).json(user);
 			}).catch(err => {

@@ -3,14 +3,17 @@ const passport = require('passport');
 const userController = require('../controllers/userController');
 
 router.route('/')
-	.post(userController.findOne)
+	.post(userController.findExisting)
 	.patch(userController.updateOne);
+
+router.route('/one/:user')
+	.get(userController.findUserProfile);
 
 router.route('/password')
 	.patch(userController.updateOnePassword);
 
 router.route('/current')
-	.get(userController.findUser)
+	.get(userController.findCurrentUser);
 
 router.route('/new')
 	.post(userController.saveNew);

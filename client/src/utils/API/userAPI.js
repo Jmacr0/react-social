@@ -1,13 +1,17 @@
 import axios from "axios";
 
 export default {
-	getUser: async function (findUser) {
-		const response = await axios.post('/api/user', findUser);
+	getExisting: async function (findExistingUser) {
+		const response = await axios.post('/api/user', findExistingUser);
 		console.log(response.data)
 		return response.data;
 	},
 	getCurrentUser: async function () {
 		const response = await axios.get('/api/user/current');
+		return response.data;
+	},
+	getUserProfile: async (getUserProfile) => {
+		const response = await axios.get(`/api/user/one/${getUserProfile}`);
 		return response.data;
 	},
 	saveUser: async function (newUser) {
