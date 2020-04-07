@@ -64,7 +64,14 @@ module.exports = {
 		db.User.findOne({
 			username: params.user
 		})
-			.populate('reviews')
+			.populate({
+				path: 'reviews',
+				populate: {
+					path: 'favourites',
+					model: 'Favourite'
+				}
+
+			})
 			.then(user => {
 				res.status(200).json(user);
 			}).catch(err => {
