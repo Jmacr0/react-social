@@ -13,7 +13,7 @@ module.exports = {
 					body,
 				});
 			console.log('new-comment: ', newComment)
-			const commentUser = await db.User
+			await db.User
 				.findOneAndUpdate({
 					username,
 				}, {
@@ -23,7 +23,7 @@ module.exports = {
 				}, {
 					new: true
 				});
-			const commentReview = await db.Review
+			await db.Review
 				.findByIdAndUpdate(review, {
 					$push: {
 						comments: newComment
@@ -61,16 +61,24 @@ module.exports = {
 		try {
 			const { comment, author, review } = req.body;
 			const deleteComment = await db.Comment.deleteOne({ _id: comment });
-			const deleteFromUser = await db.User.findByIdAndUpdate(author, {
+			await db.User.findByIdAndUpdate(author, {
 				$pull: {
-					comments: { _id: comment }
+					comments: {
+						$in: [{
+							_id: comment
+						}]
+					}
 				}
 			}, {
 				new: true
 			});
-			const deleteFromReview = await db.Review.findByIdAndUpdate(review, {
+			await db.Review.findByIdAndUpdate(review, {
 				$pull: {
-					comments: { _id: comment }
+					comments: {
+						$in: [{
+							_id: comment
+						}]
+					}
 				}
 			}, {
 				new: true

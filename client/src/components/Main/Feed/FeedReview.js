@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Nav, Tab } from 'react-bootstrap';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { faAddressBook, faImage, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faImage } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { UserContext } from '../../../utils/UserContext';
 import TextTruncate from 'react-text-truncate';
@@ -11,6 +10,7 @@ import API from '../../../utils/API';
 import { ModalDelete } from '../Modal/ModalDelete';
 import '../../../index.css';
 import { UserLink } from '../User/UserLink';
+import { Favourite } from './Favourite/Favourite';
 
 export const FeedReview = ({
 	review: {
@@ -31,22 +31,6 @@ export const FeedReview = ({
 	const { id, username, loadUser } = useContext(UserContext);
 	const history = useHistory();
 
-	const isFavourite = (favourite, index) => {
-		console.log(id, favourite.author)
-		if (id === favourite.author) {
-			return <FontAwesomeIcon
-				key={index}
-				icon={faHeartSolid}
-				style={{ cursor: 'pointer', color: '#ff4f4f' }}
-				onClick={() => toUnfavourite()}
-			/>
-		}
-		return <FontAwesomeIcon
-			key={index}
-			icon={faHeartRegular}
-			style={{ cursor: 'pointer' }}
-			onClick={() => toFavourite()} />
-	}
 	const toFavourite = async () => {
 		const newFavourite = {
 			review: _id,
@@ -150,15 +134,12 @@ export const FeedReview = ({
 								</Nav.Item>
 								{location.pathname !== '/profile' &&
 									<Nav.Item className='ml-auto'>
-										{
-											favourites.length
-												? favourites.map(
-													(favourite, index) => isFavourite(favourite, index))
-												: <FontAwesomeIcon
-													icon={faHeartRegular}
-													style={{ cursor: 'pointer' }}
-													onClick={() => toFavourite()} />
-										}
+										<Favourite
+											userId={id}
+											favourites={favourites}
+											onFavourite={toFavourite}
+											onUnfavourite={toUnfavourite}
+										/>
 									</Nav.Item>}
 								<Nav.Item className='ml-auto'>
 									<Nav.Link disabled>

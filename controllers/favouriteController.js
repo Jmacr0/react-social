@@ -38,30 +38,43 @@ module.exports = {
 			const { author, review } = req.body;
 			console.log('unfavouriting.....')
 			console.log(author, review)
+			const favourite = await db.Favourite.findOne({
+				author,
+				review
+			})
 			const unfavouriteFavourite = await db.Favourite.findOne({
 				author,
 				review
 			})
 				.remove()
 				.exec();
-			const { _id } = unfavouriteFavourite;
-			console.log(unfavouriteFavourite);
-			const unfavouriteUser = await db.User
+			const { _id } = favourite;
+			await db.User
 				.findByIdAndUpdate(author, {
 					$pull: {
-						favourites: { _id }
+						favourites: {
+							$in: [{
+								_id: _id
+							}]
+						}
 					}
 				}, {
 					multi: true
-				});
-			const unfavouriteReview = await db.Review
+				})
+				.exec();
+			await db.Review
 				.findByIdAndUpdate(review, {
 					$pull: {
-						favourites: { _id }
+						favourites: {
+							$in: [{
+								_id: _id
+							}]
+						}
 					}
 				}, {
 					multi: true
-				});
+				})
+				.exec();
 			res.status(200).json(unfavouriteFavourite);
 		} catch (err) {
 			res.status(500);
