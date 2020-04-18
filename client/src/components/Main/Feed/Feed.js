@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import API from '../../../utils/API';
 import { FeedReview } from './FeedReview';
+import { PaginationMain } from '../Pagination/PaginationMain';
 
 export const Feed = () => {
 	const [reviews, setReviews] = useState([]);
@@ -67,6 +68,7 @@ export const Feed = () => {
 					// handleFavouriteChange={handleFeedReviewFavouriteChange}
 					key={index} />
 			)}
+			<PaginationMain />
 		</Container>
 	)
 }

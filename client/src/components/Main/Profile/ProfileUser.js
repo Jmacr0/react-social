@@ -32,7 +32,7 @@ export const ProfileUser = ({ match }) => {
 
     useEffect(() => {
         loadUser();
-    }, [])
+    }, []);
 
     return (
         <>
@@ -51,7 +51,7 @@ export const ProfileUser = ({ match }) => {
                     <Col>
                         <img
                             src={userProfile.img}
-                            alt='user-profile-image'
+                            alt='user-profile'
                             className='mb-3'
                         />
                     </Col>
@@ -84,7 +84,7 @@ export const ProfileUser = ({ match }) => {
                     </Col>
                 </Row>
                 {descReviews.map((review, index) =>
-                    <FeedReview review={review} key={index} />
+                    <FeedReview loadProfileUser={loadUser} review={review} key={index} />
                 )}
             </Container>
         </>

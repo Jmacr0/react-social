@@ -66,12 +66,15 @@ module.exports = {
 		})
 			.populate({
 				path: 'reviews',
-				populate: {
+				populate: [{
+					path: 'author',
+					model: 'User'
+				}, {
 					path: 'favourites',
 					model: 'Favourite'
-				}
-
+				}]
 			})
+			.populate('favourites')
 			.then(user => {
 				res.status(200).json(user);
 			}).catch(err => {
