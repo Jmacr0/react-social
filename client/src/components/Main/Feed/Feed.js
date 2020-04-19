@@ -4,10 +4,13 @@ import { useParams } from 'react-router-dom';
 import API from '../../../utils/API';
 import { FeedReview } from './FeedReview';
 import { PaginationMain } from '../Pagination/PaginationMain';
+import { set } from 'mongoose';
 
 export const Feed = () => {
 	const [reviews, setReviews] = useState([]);
-	const { category, search } = useParams();
+	const [displayReviews, setDisplayReviews] = useState([]);
+	const [activePage, setActivePage] = useState(1);
+	const { category, search } = useParams()
 
 	const loadReviews = () => {
 		if (category === 'All') {
@@ -36,6 +39,17 @@ export const Feed = () => {
 		}
 	}
 
+	const reviewsToDisplay = () => {
+		const firstReviewIndex = (activePage * 10 - 10);
+		const lastReviewIndex = (activePage * 10);
+		const selectReviewsToDisplay = [...reviews].slice(firstReviewIndex, lastReviewIndex);
+		setDisplayReviews(selectReviewsToDisplay);
+	}
+
+	const handleClickedPage = (pageNumber) => {
+		setActivePage(pageNumber);
+	}
+
 	// const handleFeedReviewFavouriteChange = (review_id, isFavourite) => {
 	// 	const newReviews = [];
 	// 	for (const review of reviews) {
@@ -56,19 +70,26 @@ export const Feed = () => {
 	// };
 
 	useEffect(() => {
+		reviewsToDisplay();
+	}, [reviews, activePage]);
+
+	useEffect(() => {
 		loadReviews();
 	}, [search, category]);
 
 	return (
 		<Container style={{ backgroundColor: '#00346e' }} fluid>
-			{reviews.map((review, index) =>
+			{displayReviews.map((review, index) =>
 				<FeedReview
 					review={review}
 					loadReviews={loadReviews}
 					// handleFavouriteChange={handleFeedReviewFavouriteChange}
 					key={index} />
 			)}
-			<PaginationMain />
+			<PaginationMain
+				activePage={activePage}
+				totalReviews={reviews}
+				handleClickedPage={handleClickedPage} />
 		</Container>
 	)
 }
