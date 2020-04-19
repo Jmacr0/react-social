@@ -8,7 +8,7 @@ import { Main } from '../Main/Main';
 
 export const Home = () => {
 	const [toggleState, setToggleState] = useState({
-		collapse: false,
+		collapse: true,
 		onClick: (collapse) => {
 			setToggleState({ ...toggleState, collapse });
 		}

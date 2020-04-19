@@ -57,10 +57,9 @@ export const Category = () => {
 						<Col className='p-0'>
 							<Card
 								onClick={() => handleSelection(category.name)}
-								className='rounded-0'
+								className='rounded-0 category'
 								bg={category.name !== 'All' ? category.colour : ''}
 								style={{
-									cursor: 'pointer',
 									backgroundColor: (category.name === 'All' && '#00346e')
 								}}
 							>

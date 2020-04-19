@@ -9,7 +9,7 @@ import { ToggleContext } from '../../utils/ToggleContext';
 import Media from 'react-media';
 
 const NavStyle = styled.div`
-	background-image: linear-gradient(#0271f1, #00c3ff);
+background-image: linear-gradient(#0271f1, #008cff);
 
 	.search {
 		opacity: 0.5;

@@ -205,7 +205,7 @@ export const FeedReview = ({
 						<Tab.Content>
 							<Tab.Pane eventKey='image'>
 								<Card.Body>
-									<Card.Img src={img} />
+									<Card.Img className='review-image' src={img} />
 								</Card.Body>
 							</Tab.Pane>
 						</Tab.Content>

@@ -78,7 +78,11 @@ export const Feed = () => {
 	}, [search, category]);
 
 	return (
-		<Container style={{ backgroundColor: '#00346e' }} fluid>
+		<Container
+			className='light-navy'
+			fluid
+		>
+			<h3 className='pt-3'>{category ? category : `Search results: ${search}`}</h3>
 			{displayReviews.map((review, index) =>
 				<FeedReview
 					review={review}

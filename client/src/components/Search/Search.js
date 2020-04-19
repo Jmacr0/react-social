@@ -21,7 +21,16 @@ export const Search = ({ main }) => {
 	return (
 		<div>
 			<input onKeyDown={handleKeyDown} className={main ? 'p-2 mr-1 rounded' : 'm-1 p-1 rounded'} placeholder='Search' value={searchTerm || ''} onChange={(e) => setSearchTerm(e.target.value)} style={{ border: 'none' }} />
-			<FontAwesomeIcon icon={faSearch} onClick={handleSubmit} style={{ cursor: 'pointer', fontSize: (main ? '2rem' : ''), color: 'white' }} />
+			<FontAwesomeIcon
+				icon={faSearch}
+				onClick={handleSubmit}
+				style={{
+					cursor: 'pointer',
+					fontSize: (main ? '2rem' : ''),
+					color: 'white',
+					paddingTop: '10px'
+				}}
+			/>
 		</div>
 	)
 }

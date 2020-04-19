@@ -39,7 +39,6 @@ const SideNavResponsive = styled.div`
 		}
 `
 
-
 export const SideBar = () => {
 	const { collapse } = useContext(ToggleContext);
 
