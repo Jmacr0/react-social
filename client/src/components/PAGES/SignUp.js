@@ -98,7 +98,7 @@ export const SignUp = ({ onAuthenticate }) => {
 				</Col>
 			</Row>
 			<Row>
-				<Col md={{ span: 8, offset: 2 }}>
+				<Col md={{ span: 6, offset: 3 }}>
 					<Button
 						variant='info btn-block rounded-0'
 						onClick={() => {
@@ -123,7 +123,7 @@ export const SignUp = ({ onAuthenticate }) => {
 						) : ''
 						}
 						<Row className='p-3'>
-							<Col>
+							<Col className='px-5'>
 								{toggleLogin ? (
 									<>
 										<h2>Login</h2>
